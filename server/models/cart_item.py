@@ -1,8 +1,15 @@
-from config import db
+from models import db
+from sqlalchemy_serializer import SerializerMixin
 
-class CartItem(db.Model):
+class CartItem(db.Model, SerializerMixin):
     __tablename__ = 'cart_items'
+    serialize_rules = ('-cart.cart_items', '-product.cart_items')  # Avoid recursive fields
+
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    cart_id = db.Column(db.Integer, db.ForeignKey('carts.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
+
+    # Relationships to Cart and Product
+    cart = db.relationship("Cart", back_populates="cart_items")
+    product = db.relationship("Product", back_populates="cart_items")
