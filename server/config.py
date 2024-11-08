@@ -1,9 +1,9 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from dotenv import load_dotenv
+##from dotenv import load_dotenv
 
-load_dotenv()
+##load_dotenv()
 
 class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "postgresql://username:password@localhost:5432/your_database")
