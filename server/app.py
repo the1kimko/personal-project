@@ -14,6 +14,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///vetty.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'your_secret_key'
 
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'default_secret_key')
+
 # Initialize database and migration
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
