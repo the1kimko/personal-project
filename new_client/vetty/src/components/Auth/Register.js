@@ -18,7 +18,8 @@ const Register = () => {
   // Define form submission handler
   const handleRegister = async (values, { setSubmitting, setErrors }) => {
     try {
-      await api.post('/auth/register', values); // Send role with registration data
+      await api.post('/users', values); // Send role with registration data
+      alert('Registration successful! You can now log in.');
       window.location.href = '/login';
     } catch (error) {
       console.error('Registration failed:', error);

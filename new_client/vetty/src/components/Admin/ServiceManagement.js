@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-//import axios from 'axios';
-import api from '../axiosConfig';
-import './admin.css';
+// src/components/Admin/ServiceManagement.js
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchServices } from '../../redux/actions/productActions';
+import { deleteService } from '../../redux/actions/adminActions';
 
 function ServiceManagement() {
-  const [services, setServices] = useState([]);
+  const dispatch = useDispatch();
+  const services = useSelector((state) => state.admin.services);
 
   useEffect(() => {
-    api.get('/services').then((response) => setServices(response.data));
-  }, []);
+    dispatch(fetchServices());
+  }, [dispatch]);
 
   const handleDelete = (serviceId) => {
-    api.delete(`/services/${serviceId}`).then(() => {
-      setServices((services) => services.filter((service) => service.id !== serviceId));
-    });
+    dispatch(deleteService(serviceId));
   };
 
   return (

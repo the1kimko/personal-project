@@ -1,5 +1,7 @@
 // src/App.js
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from './redux/actions/authActions';
 import { Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import HomePage from './components/Home/HomePage';
@@ -15,8 +17,22 @@ import OrderConfirmation from './pages/OrderConfirmation';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import AdminDashboard from './components/Admin/AdminDashboard';
+import ProductManagement from './components/Admin/ProductManagement';
+import ServiceManagement from './components/Admin/ServiceManagement';
+import OrderManagement from './components/Admin/OrderManagement';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+    if (token && user) {
+      dispatch(loginSuccess(user)); // Set user state in Redux
+    }
+  }, [dispatch]);
+
   return (
     <div className="app">
       {/* NavBar replaces the static header */}
@@ -37,6 +53,9 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/products" element={<ProductManagement />} />
+          <Route path="/admin/services" element={<ServiceManagement />} />
+          <Route path="/admin/orders" element={<OrderManagement />} />
         </Routes>
       </main>
 

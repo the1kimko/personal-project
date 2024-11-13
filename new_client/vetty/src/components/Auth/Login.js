@@ -5,10 +5,12 @@ import * as Yup from 'yup';
 import api from '../../axiosConfig';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../../redux/actions/authActions';
+import { useNavigate } from 'react-router-dom';
 import './auth.css';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object({
     username: Yup.string().required('Username is required'),
@@ -17,25 +19,31 @@ const Login = () => {
 
   const handleLogin = async (values, { setSubmitting, setErrors }) => {
     try {
-      const response = await api.post('/auth/login', values);
-      const user = response.data.user;
+      const response = await api.get('/users', values);
+      const user = response.data.find(
+        (u) => u.username === values.username && u.password === values.password
+      );
       
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('role', user.role); // Save role in local storage for quick access
-      dispatch(loginSuccess(user)); // Dispatch Redux action to store user data, including role
+      // Ensure the user exists and has a role before proceeding
+      if (user && user.role) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userRole', user.role); // Save userRole in localStorage
+        dispatch(loginSuccess(user)); // Update Redux state with user data
+        alert('Login successful!');
 
-      if (user.role === 'admin') {
-        window.location.href = '/admin'; // Redirect admins to the admin dashboard
+        // Redirect based on role
+        navigate(user.role === 'admin' ? '/admin' : '/');
       } else {
-        window.location.href = '/'; // Redirect normal users to the home page
+        setErrors({ apiError: 'Invalid username or password' });
       }
-    } catch (error) {
-      console.error('Login failed:', error);
-      setErrors({ apiError: 'Invalid username or password' });
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  } catch (error) {
+    console.error('Login failed:', error);
+    setErrors({ apiError: 'Unable to log in' });
+  } finally {
+    setSubmitting(false);
+  }
+};
+
 
   return (
     <div className="login">

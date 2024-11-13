@@ -2,33 +2,44 @@
   "users": [
     {
       "id": "1",
-      "username": "user1",
-      "password_hash": "hashed_password1",
-      "role": "user"
-    },
-    {
-      "id": "2",
-      "username": "user2",
-      "password_hash": "hashed_password2",
+      "username": "JackyA",
+      "password": "p@ssword",
       "role": "admin"
     },
     {
+      "id": "2",
+      "username": "YobraM",
+      "password": "newC@r",
+      "role": "user"
+    },
+    {
       "id": "3",
-      "username": "user3",
-      "password_hash": "hashed_password3",
+      "username": "MajD",
+      "password": "dishu77",
       "role": "user"
     },
     {
       "id": "4",
-      "username": "user4",
-      "password_hash": "hashed_password4",
+      "username": "Wajabz",
+      "password": "pendu27",
       "role": "user"
     },
     {
       "id": "5",
-      "username": "user5",
-      "password_hash": "hashed_password5",
-      "role": "admin"
+      "username": "KimK",
+      "password": "sz@nta",
+      "role": "user"
+    },
+    {
+      "id": "9915",
+      "username": "JadeCarg",
+      "password": "cZech76",
+      "role": "user"
+    },
+    {
+      "id": "9b25",
+      "username": "JadeCarg",
+      "password": "cZech76"
     }
   ],
   "products": [
@@ -146,5 +157,6 @@
       "quantity": 1,
       "productId": "3"
     }
-  ]
+  ],
+  "orders": []
 }

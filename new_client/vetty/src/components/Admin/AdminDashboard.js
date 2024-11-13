@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './admin.css';
 
 function AdminDashboard() {
-  const userRole = localStorage.getItem('userRole');
+  const user = useSelector((state) => state.auth.user); // Get user from Redux
 
-  if (userRole !== 'admin') {
+  if (!user || user.role !== 'admin') {
     return <Navigate to="/" />; // Redirect to homepage if not admin
   }
   return (

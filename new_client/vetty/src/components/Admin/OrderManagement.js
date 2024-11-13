@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from 'react';
-//import axios from 'axios';
-import api from '../axiosConfig';
-import './admin.css';
+// src/components/Admin/OrderManagement.js
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchOrders, updateOrderStatus } from '../../redux/actions/adminActions';
 
 function OrderManagement() {
-  const [orders, setOrders] = useState([]);
+  const dispatch = useDispatch();
+  const orders = useSelector((state) => state.admin.orders);
 
   useEffect(() => {
-    api.get('/orders').then((response) => setOrders(response.data));
-  }, []);
+    dispatch(fetchOrders());
+  }, [dispatch]);
 
   const handleStatusChange = (orderId, status) => {
-    api.put(`/orders/${orderId}`, { status }).then((response) => {
-      setOrders((orders) =>
-        orders.map((order) => (order.id === orderId ? response.data : order))
-      );
-    });
+    dispatch(updateOrderStatus(orderId, status));
   };
 
   return (

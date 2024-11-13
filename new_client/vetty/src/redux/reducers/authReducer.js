@@ -1,11 +1,16 @@
+// src/redux/reducers/authReducer.js
+import { LOGIN_SUCCESS, LOGOUT } from '../actions/authActions';
+
 const initialState = {
     user: null,
   };
   
   const authReducer = (state = initialState, action) => {
     switch (action.type) {
-      case 'LOGIN_SUCCESS':
+      case LOGIN_SUCCESS:
         return { ...state, user: action.payload };
+      case LOGOUT:
+        return { ...state, user: null };
       default:
         return state;
     }

@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-//import axios from 'axios';
-import api from '../axiosConfig';
-import './admin.css';
+// src/components/Admin/ProductManagement.js
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../../redux/actions/productActions';
+import { deleteProduct } from '../../redux/actions/adminActions';
 
 function ProductManagement() {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.admin.products);
 
   useEffect(() => {
-    api.get('/products').then((response) => setProducts(response.data));
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   const handleDelete = (productId) => {
-    api.delete(`/products/${productId}`).then(() => {
-      setProducts((products) => products.filter((product) => product.id !== productId));
-    });
+    dispatch(deleteProduct(productId));
   };
 
   return (
@@ -26,6 +26,7 @@ function ProductManagement() {
           <button onClick={() => handleDelete(product.id)}>Delete</button>
         </div>
       ))}
+      {/* Form for adding/updating products */}
     </div>
   );
 }
