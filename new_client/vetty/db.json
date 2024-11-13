@@ -1,31 +1,31 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "user1",
       "password_hash": "hashed_password1",
       "role": "user"
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "user2",
       "password_hash": "hashed_password2",
       "role": "admin"
     },
     {
-      "id": 3,
+      "id": "3",
       "username": "user3",
       "password_hash": "hashed_password3",
       "role": "user"
     },
     {
-      "id": 4,
+      "id": "4",
       "username": "user4",
       "password_hash": "hashed_password4",
       "role": "user"
     },
     {
-      "id": 5,
+      "id": "5",
       "username": "user5",
       "password_hash": "hashed_password5",
       "role": "admin"
@@ -33,7 +33,7 @@
   ],
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Premium Cat Food",
       "description": "High-quality cat food with essential nutrients.",
       "price": 12.99,
@@ -41,7 +41,7 @@
       "image": "./src/images/premium_cat_food.jpg"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Dog Chew Toy",
       "description": "Durable chew toy for dogs of all sizes.",
       "price": 9.99,
@@ -49,7 +49,7 @@
       "image": "./src/images/dog_chew_toy.jpg"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Fish Flakes",
       "description": "Flake food for aquarium fish.",
       "price": 5.49,
@@ -57,7 +57,7 @@
       "image": "./src/images/fish_flakes.jpg"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Bird Seed Mix",
       "description": "Nutritious seed mix for pet birds.",
       "price": 7.99,
@@ -65,7 +65,7 @@
       "image": "./src/images/bird_seed_mix.jpg"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Cat Litter",
       "description": "Odor-absorbing cat litter for easy cleanup.",
       "price": 14.99,
@@ -75,35 +75,35 @@
   ],
   "services": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Dog Grooming",
       "description": "Full grooming service for dogs.",
       "price": 40,
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Cat Vaccination",
       "description": "Vaccination service for cats to prevent diseases.",
       "price": 25,
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Bird Health Check",
       "description": "Routine checkup for pet birds.",
       "price": 30,
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Fish Tank Cleaning",
       "description": "Professional cleaning service for fish tanks.",
       "price": 20,
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Puppy Training",
       "description": "Basic obedience training for puppies.",
       "price": 50,
@@ -112,32 +112,39 @@
   ],
   "cart": [
     {
-      "id": "1bad",
-      "productId": 1
+      "quantity": null,
+      "id": "9b5f"
     },
     {
-      "id": "dbbc",
-      "productId": 2
+      "quantity": 2,
+      "id": "5425"
     },
     {
-      "id": "80c5",
-      "productId": 3
+      "quantity": 2,
+      "id": "e86e"
     },
     {
-      "id": "3d06",
-      "productId": 3
+      "quantity": null,
+      "id": "c8f9"
     },
     {
-      "id": "199b",
-      "productId": 4
+      "id": "7b87",
+      "productId": "2"
     },
     {
-      "id": "c115",
-      "productId": 4
+      "id": "8f22",
+      "quantity": 1,
+      "productId": "4"
     },
     {
-      "id": "aa8c",
-      "productId": 2
+      "id": "ba95",
+      "quantity": 1,
+      "productId": "1"
+    },
+    {
+      "id": "85e1",
+      "quantity": 1,
+      "productId": "3"
     }
   ]
 }

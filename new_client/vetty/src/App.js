@@ -29,8 +29,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/products" element={<ProductList />} /> {/* New route for ProductList */}
           <Route path="/services" element={<ServiceList />} /> {/* New route for ServiceList */}
-          <Route path="/product/:id" element={<ProductDetails />} />
-          <Route path="/service/:id" element={<ServiceDetails />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/services/:id" element={<ServiceDetails />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />

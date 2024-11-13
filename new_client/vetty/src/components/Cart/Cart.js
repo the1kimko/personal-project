@@ -1,61 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import api from '../../axiosConfig';
+// src/components/Cart/Cart.js
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCartItems } from '../../redux/actions/cartActions';
 import './cart.css';
 
 function Cart() {
-  const [cartItems, setCartItems] = useState([]);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
 
   useEffect(() => {
-    const fetchCartData = async () => {
-      try {
-        // Fetch cart, products, and services
-        const [cartResponse, productsResponse, servicesResponse] = await Promise.all([
-          api.get('/cart'),
-          api.get('/products'),
-          api.get('/services')
-        ]);
-
-        const products = productsResponse.data;
-        const services = servicesResponse.data;
-
-        // Populate each cart item with full details
-        const populatedCartItems = cartResponse.data.map((item) => {
-          let fullDetails = null;
-
-          if (item.productId) {
-            fullDetails = products.find((product) => product.id === item.productId);
-          } else if (item.serviceId) {
-            fullDetails = services.find((service) => service.id === item.serviceId);
-          }
-
-          // Combine cart item with full details and desired structure
-          return fullDetails
-            ? { 
-                id: item.id, 
-                quantity: item.quantity, 
-                name: fullDetails.name,
-                description: fullDetails.description,
-                price: fullDetails.price,
-                image: fullDetails.image,
-                productId: item.productId,
-                serviceId: item.serviceId
-              }
-            : item;
-        });
-
-        setCartItems(populatedCartItems);
-      } catch (error) {
-        console.error('Error fetching cart data:', error);
-      }
-    };
-
-    fetchCartData();
-  }, []);
+    dispatch(fetchCartItems()); // Fetch cart items with details
+  }, [dispatch]);
 
   const handleCheckout = () => {
-    api.post('/checkout')
-      .then(() => alert('Order placed successfully'))
-      .catch((error) => console.error('Error during checkout:', error));
+    alert('Order placed successfully');
+    // Optionally dispatch a checkout action here
   };
 
   return (

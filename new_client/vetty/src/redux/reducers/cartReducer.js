@@ -15,18 +15,26 @@ const cartReducer = (state = initialState, action) => {
     case FETCH_CART_ITEMS_SUCCESS:
       return {
         ...state,
-        items: action.payload,
+        items: action.payload.map(item => ({
+          ...item,
+          quantity: item.quantity ?? 1 // Ensure quantity defaults to 1 if null
+        })),
       };
     case ADD_TO_CART_SUCCESS:
       return {
         ...state,
-        items: [...state.items, action.payload],
+        items: [
+          ...state.items, 
+          { ...action.payload, quantity: action.payload.quantity ?? 1}
+        ],
       };
     case UPDATE_CART_ITEM_SUCCESS:
       return {
         ...state,
         items: state.items.map((item) =>
-          item.id === action.payload.id ? action.payload : item
+          item.id === action.payload.id 
+            ? { ...action.payload, quantity: action.payload.quantity ?? 1 } 
+            : item
         ),
       };
     case REMOVE_CART_ITEM_SUCCESS:

@@ -21,7 +21,7 @@ function ProductList() {
       {products.length > 0 ? (
         products.map((product) => <ProductCard key={product.id} product={product} />)
       ) : (
-        <p>No products available.</p>
+        <p>Loading products...</p>
       )}
     </div>
   );

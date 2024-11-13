@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchServices } from '../../redux/actions/productActions';
-import { Link } from 'react-router-dom';
+import ServiceCard from './ServiceCard';
 import './service.css';
 
 function ServiceList() {
@@ -17,19 +17,12 @@ function ServiceList() {
 
   return (
     <div className="service-list">
-      <h2 className="service-list-title">Our Services</h2>
-      <div className="service-cards">
-        {services.map((service) => (
-          <div key={service.id} className="service-card">
-            <h3>{service.name}</h3>
-            <p>{service.description}</p>
-            <p className="service-price">${service.price}</p>
-            <Link to={`/services/${service.id}`} className="service-details-link">
-              View Details
-            </Link>
-          </div>
-        ))}
-      </div>
+      <h2>Our Services</h2>
+      {services.length > 0 ? (
+        services.map((service) => <ServiceCard key={service.id} service={service} />)
+      ) : (
+        <p>No services available.</p>
+      )}
     </div>
   );
 }
