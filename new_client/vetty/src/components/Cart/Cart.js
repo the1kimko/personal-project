@@ -12,7 +12,7 @@ function Cart() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchCartItems()); // Fetch cart items with details
+    dispatch(fetchCartItems());
   }, [dispatch]);
 
   const handleCheckout = () => {
@@ -26,7 +26,12 @@ function Cart() {
       {cartItems.length > 0 ? (
         cartItems.map((item) => (
           <div key={item.id} className="cart-item">
-            <img src={item.image || 'https://via.placeholder.com/150'} alt={item.name} />
+            {/* Use fallback image if no image exists */}
+            <img 
+              src={item.image || 'https://via.placeholder.com/150'} 
+              alt={item.name || 'Product Image'} 
+              className="cart-item-image"
+            />
             <h3>{item.name || 'Item name unavailable'}</h3>
             <p>{item.description || 'No description available'}</p>
             <p>Price: ${item.price || 'N/A'}</p>

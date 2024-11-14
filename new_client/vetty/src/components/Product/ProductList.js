@@ -16,16 +16,19 @@ function ProductList() {
   console.log('Products:', products); // Debugging line
 
   return (
-    <div className="product-list">
-      <h2>Product List</h2>
-      {products.length > 0 ? (
-        products.map((product) => <ProductCard key={product.id} product={product} />)
-      ) : (
-        <p>Loading products...</p>
-      )}
-    </div>
+    <>
+       <h2 className="centered-heading">Product List</h2>
+      <div className="product-list">
+        {products.length > 0 ? (
+          products.map((product) => <ProductCard key={product.id} product={product} />)
+        ) : (
+          <p>Loading products...</p>
+        )}
+      </div>
+    </>
   );
 }
 
 export default ProductList;
+
 

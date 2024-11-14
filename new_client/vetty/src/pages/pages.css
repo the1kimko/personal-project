@@ -1,101 +1,137 @@
-/* src/pages/pages.css */
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #f5f6fa;
+  margin: 0;
+  padding: 0;
+}
 
 /* Order Confirmation */
 .order-confirmation {
-    padding: 40px 20px;
-    text-align: center;
-  }
-  
-  .order-confirmation h2 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .order-confirmation p {
-    font-size: 16px;
-    color: #666;
-  }
-  
-  /* Order History */
-  .order-history {
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .order-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .order-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-  
-  .order-card h3 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .order-card p {
-    font-size: 16px;
-    color: #666;
-    margin-top: 8px;
-  }
-  
-  /* Profile */
-  .profile {
-    padding: 40px 20px;
-    max-width: 500px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .profile-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .profile-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .profile-card p {
-    font-size: 16px;
-    color: #333;
-    margin-top: 8px;
-  }
-  
-  /* Settings */
-  .settings {
-    padding: 40px 20px;
-    text-align: center;
-  }
-  
-  .settings button {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .settings button:hover {
-    background-color: #555;
-  }
-  
+  padding: 50px 25px;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 50px auto;
+}
+
+.order-confirmation h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.order-confirmation p {
+  font-size: 18px;
+  color: #777;
+  line-height: 1.6;
+}
+
+/* Order History */
+.order-history {
+  padding: 50px 25px;
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: #f9fafc;
+  border-radius: 8px;
+}
+
+.order-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.order-card {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-5px);
+}
+
+.order-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.order-card p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Profile */
+.profile {
+  padding: 50px 25px;
+  max-width: 500px;
+  margin: 50px auto;
+  background-color: #f9fafc;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.profile-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.profile-card {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  margin-top: 20px;
+}
+
+.profile-card p {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* Settings */
+.settings {
+  padding: 50px 25px;
+  text-align: center;
+  max-width: 400px;
+  margin: 50px auto;
+}
+
+.settings button {
+  background-color: #333;
+  color: white;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.settings button:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}

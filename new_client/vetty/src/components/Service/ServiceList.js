@@ -16,14 +16,16 @@ function ServiceList() {
   console.log('Services:', services); // Debugging line
 
   return (
+    <>
+     <h2 className="centered-heading">ServiceList</h2>
     <div className="service-list">
-      <h2>Our Services</h2>
       {services.length > 0 ? (
         services.map((service) => <ServiceCard key={service.id} service={service} />)
       ) : (
         <p>No services available.</p>
       )}
     </div>
+    </>
   );
 }
 

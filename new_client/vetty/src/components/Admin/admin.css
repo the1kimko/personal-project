@@ -1,99 +1,313 @@
-/* src/components/Admin/admin.css */
-
 /* General Admin Dashboard Styles */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #ecf0f1;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main Dashboard Container */
 .admin-dashboard {
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
+  padding: 60px 40px;
+  max-width: 1100px;
+  margin: 30px auto;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Main Title */
+.admin-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2d3e50;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Links Section */
+.admin-links {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-link {
+  display: block;
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 20px 28px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  width: 300px;
+  margin: 0 auto;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.admin-link:hover {
+  background-color: #2980b9;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Management Page */
+.management-page {
+  padding: 50px 30px;
+  max-width: 950px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Management Header */
+.management-page h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #34495e;
+  text-align: center;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Form Styling */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.form input {
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #333;
+  background-color: #f7f7f7;
+  transition: all 0.3s ease;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: #3498db;
+  background-color: #ffffff;
+}
+
+.form button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.4s ease;
+  margin-top: 15px;
+}
+
+.form button:hover {
+  background-color: #2980b9;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling for Order Management */
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+.order-table th,
+.order-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+  font-size: 16px;
+  color: #34495e;
+}
+
+.order-table th {
+  background-color: #f1f1f1;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.order-table td {
+  color: #7f8c8d;
+}
+
+.order-table button {
+  background-color: #3498db;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 8px;
+  transition: all 0.3s ease;
+}
+
+.order-table button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.order-table button:last-child {
+  background-color: #e74c3c;
+}
+
+.order-table button:last-child:hover {
+  background-color: #c0392b;
+}
+
+/* Item Cards for Products and Services */
+.item-card {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.item-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+}
+
+.item-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.item-card p {
+  font-size: 16px;
+  color: #7f8c8d;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+
+.action-button,
+.delete-button {
+  padding: 14px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  width: 100%;
+  transition: all 0.4s ease;
+  border-radius: 8px;
+}
+
+.action-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.action-button:hover {
+  background-color: #218838;
+  transform: translateY(-4px);
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+  transform: translateY(-4px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 40px 20px;
+  }
+
   .admin-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
+    font-size: 26px;
     margin-bottom: 20px;
   }
-  
-  .admin-links {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
+
   .admin-link {
-    display: block;
-    background-color: #007bff;
-    color: white;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
+    padding: 14px 18px;
   }
-  
-  .admin-link:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Management Page Styles (Order, Product, Service) */
+
   .management-page {
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: 0 auto;
+    padding: 30px 20px;
   }
-  
-  .management-page h2 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
+
+  .form {
+    max-width: 100%;
+    padding: 0 10px;
   }
-  
-  /* Item Card Styles (Orders, Products, Services) */
+
+  .form input {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .form button {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .order-table th,
+  .order-table td {
+    padding: 12px;
+    font-size: 14px;
+  }
+
   .item-card {
-    background-color: #fff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
   }
-  
+
   .item-card h3 {
     font-size: 18px;
-    font-weight: 600;
-    color: #333;
   }
-  
+
   .item-card p {
-    font-size: 16px;
-    color: #666;
-    margin-top: 8px;
-  }
-  
-  /* Action Button Styles */
-  .action-button {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
     font-size: 14px;
-    margin-top: 10px;
   }
-  
-  .action-button:hover {
-    background-color: #218838;
-  }
-  
+
+  .action-button,
   .delete-button {
-    background-color: #dc3545;
+    padding: 12px 18px;
+    font-size: 16px;
   }
-  
-  .delete-button:hover {
-    background-color: #c82333;
-  }
-  
+}

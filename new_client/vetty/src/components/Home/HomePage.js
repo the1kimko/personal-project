@@ -25,20 +25,11 @@ function HomePage() {
         <p>Discover the best products and services for your beloved pets!</p>
       </section>
 
-      {/* About Section */}
-      <section className="about">
-        <h2>About Us</h2>
-        <p>
-          We’re dedicated to offering the finest products and services for your pets. From food and accessories to grooming
-          and healthcare, we provide everything you need to keep your pets happy and healthy.
-        </p>
-      </section>
-
       {/* Products Section */}
       <section className="products-section">
         <h2>Our Products</h2>
         <div className="product-list">
-          {products.slice(0, 4).map((product) => ( // Display only a few items as a preview
+          {products.slice(0, 4).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
@@ -51,13 +42,22 @@ function HomePage() {
       <section className="services-section">
         <h2>Our Services</h2>
         <div className="service-list">
-          {services.slice(0, 4).map((service) => ( // Display only a few items as a preview
+          {services.slice(0, 4).map((service) => (
             <ServiceCard key={service.id} service={service} />
           ))}
         </div>
         <Link to="/services">
           <button className="view-more-button">View More Services</button>
         </Link>
+      </section>
+
+      {/* About Section */}
+      <section className="about">
+        <h2>About Us</h2>
+        <p>
+          We’re dedicated to offering the finest products and services for your pets. From food and accessories to grooming
+          and healthcare, we provide everything you need to keep your pets happy and healthy.
+        </p>
       </section>
     </div>
   );
