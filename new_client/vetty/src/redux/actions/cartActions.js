@@ -6,6 +6,7 @@ export const FETCH_CART_ITEMS_SUCCESS = 'FETCH_CART_ITEMS_SUCCESS';
 export const ADD_TO_CART_SUCCESS = 'ADD_TO_CART_SUCCESS';
 export const UPDATE_CART_ITEM_SUCCESS = 'UPDATE_CART_ITEM_SUCCESS';
 export const REMOVE_CART_ITEM_SUCCESS = 'REMOVE_CART_ITEM_SUCCESS';
+export const CLEAR_CART_SUCCESS = 'CLEAR_CART_SUCCESS';
 
 // Fetch all items in the cart with product and service details
 export const fetchCartItems = () => async (dispatch) => {
@@ -96,5 +97,19 @@ export const removeCartItem = (itemId) => async (dispatch) => {
     dispatch({ type: REMOVE_CART_ITEM_SUCCESS, payload: itemId });
   } catch (error) {
     console.error('Error removing cart item:', error);
+  }
+};
+
+export const clearCart = () => ({
+  type: CLEAR_CART_SUCCESS,
+});
+
+export const checkoutCart = () => async (dispatch) => {
+  try {
+    await api.post('/checkout'); // Mock checkout request to API
+    dispatch(clearCart()); // Clear cart in the Redux store
+    alert('Checkout successful! Your cart has been cleared.');
+  } catch (error) {
+    console.error('Error during checkout:', error);
   }
 };

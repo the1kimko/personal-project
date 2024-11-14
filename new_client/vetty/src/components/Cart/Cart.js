@@ -1,20 +1,23 @@
 // src/components/Cart/Cart.js
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCartItems } from '../../redux/actions/cartActions';
+import { checkoutCart } from '../../redux/actions/cartActions';
 import './cart.css';
 
 function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchCartItems()); // Fetch cart items with details
   }, [dispatch]);
 
   const handleCheckout = () => {
-    alert('Order placed successfully');
-    // Optionally dispatch a checkout action here
+    dispatch(checkoutCart());
+    navigate('/order-confirmation');
   };
 
   return (
