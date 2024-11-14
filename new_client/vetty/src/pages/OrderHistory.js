@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchOrderHistory } from '../redux/actions/adminActions';
 //import axios from 'axios';
-import api from '../axiosConfig';
 import './pages.css';
 
 function OrderHistory() {
-  const [orders, setOrders] = useState([]);
+  const dispatch = useDispatch();
+  const orders = useSelector((state) => state.order.orders);
 
   useEffect(() => {
-    api.get('/orders').then((response) => setOrders(response.data));
-  }, []);
+    dispatch(fetchOrderHistory());
+  }, [dispatch]);
 
   return (
     <div className="order-history">

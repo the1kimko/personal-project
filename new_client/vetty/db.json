@@ -40,12 +40,6 @@
       "id": "9b25",
       "username": "JadeCarg",
       "password": "cZech76"
-    },
-    {
-      "id": "f808",
-      "username": "Brayo",
-      "password": "Nowwhat!",
-      "role": "user"
     }
   ],
   "products": [
@@ -55,7 +49,7 @@
       "description": "High-quality cat food with essential nutrients.",
       "price": 12.99,
       "stock": 100,
-      "image": "https://ibb.co/ySFJ5bw"
+      "image": "./src/images/premium_cat_food.jpg"
     },
     {
       "id": "2",
@@ -80,6 +74,14 @@
       "price": 7.99,
       "stock": 150,
       "image": "./src/images/bird_seed_mix.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Cat Litter",
+      "description": "Odor-absorbing cat litter for easy cleanup.",
+      "price": 14.99,
+      "stock": 80,
+      "image": "./src/images/cat_litter.jpg"
     }
   ],
   "services": [
@@ -146,8 +148,9 @@
       "productId": "4"
     },
     {
-      "quantity": 2,
-      "id": "ba95"
+      "id": "ba95",
+      "quantity": 1,
+      "productId": "1"
     },
     {
       "id": "85e1",
@@ -155,9 +158,14 @@
       "productId": "3"
     },
     {
-      "id": "f777",
+      "id": "301c",
       "quantity": 1,
-      "productId": "5"
+      "productId": "3"
+    },
+    {
+      "id": "ef11",
+      "quantity": 1,
+      "productId": "1"
     }
   ],
   "orders": []
