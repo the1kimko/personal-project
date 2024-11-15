@@ -95,6 +95,7 @@ export const removeCartItem = (itemId) => async (dispatch) => {
   try {
     await api.delete(`/cart/${itemId}`);
     dispatch({ type: REMOVE_CART_ITEM_SUCCESS, payload: itemId });
+    alert('Item removed from cart.');
   } catch (error) {
     console.error('Error removing cart item:', error);
   }

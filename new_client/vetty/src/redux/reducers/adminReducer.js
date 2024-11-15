@@ -88,7 +88,7 @@ import {
       case FETCH_ORDER_HISTORY_SUCCESS:
         return {
           ...state,
-          orderHistory: action.payload,
+          orders: action.payload,
         };
       case FETCH_SERVICE_REQUESTS_SUCCESS:
         return { ...state, serviceRequests: action.payload };

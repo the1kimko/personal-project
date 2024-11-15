@@ -2,13 +2,13 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCartItems } from '../../redux/actions/cartActions';
-import { checkoutCart } from '../../redux/actions/cartActions';
+import { fetchCartItems, checkoutCart } from '../../redux/actions/cartActions';
 import './cart.css';
 
 function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+  const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,8 +16,13 @@ function Cart() {
   }, [dispatch]);
 
   const handleCheckout = () => {
-    dispatch(checkoutCart());
-    navigate('/order-confirmation');
+    if (!user) {
+      alert('You need to log in to proceed with checkout.');
+      navigate('/login');
+      return;
+    }
+    dispatch(checkoutCart()); // Dispatch checkout action
+    navigate('/order-confirmation'); // Redirect to OrderConfirmation page
   };
 
   return (

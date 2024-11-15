@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOrders, updateOrderStatus } from '../../redux/actions/adminActions';
+import './admin.css'
 
 const OrderManagement = () => {
   const dispatch = useDispatch();

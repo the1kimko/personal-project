@@ -76,6 +76,71 @@ body {
   line-height: 1.5;
 }
 
+/* General styles for the Order Confirmation page */
+.order-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+/* Header styling */
+.order-confirmation h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Text paragraph styling */
+.order-confirmation p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Confirmation message box */
+.order-confirmation .message-box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Success icon */
+.order-confirmation .success-icon {
+  font-size: 50px;
+  color: #28a745;
+  margin-bottom: 10px;
+}
+
+/* Button styles */
+.order-confirmation button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.order-confirmation button:hover {
+  background-color: #0056b3;
+}
+
+
 /* Profile */
 .profile {
   padding: 50px 25px;

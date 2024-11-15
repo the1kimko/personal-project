@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../redux/actions/authActions';
+import { logoutSuccess } from '../../redux/actions/authActions';
 import './navbar.css';
 
 function NavBar() {
@@ -12,7 +12,7 @@ function NavBar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout()); // Dispatch logout action to clear Redux user data
+    dispatch(logoutSuccess()); // Dispatch logout action to clear Redux user data
     alert('You have successfully logged out.');
     navigate('/login'); // Redirect to login page after logout
   };

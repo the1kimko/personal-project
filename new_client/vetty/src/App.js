@@ -25,11 +25,9 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-
-    if (token && user) {
-      dispatch(loginSuccess(user)); // Set user state in Redux
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      dispatch(loginSuccess(storedUser)); // Rehydrate user data into Redux store
     }
   }, [dispatch]);
 
@@ -48,7 +46,7 @@ function App() {
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/services/:id" element={<ServiceDetails />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/order-history" element={<OrderHistory />} />
+          <Route path="/orderHistory" element={<OrderHistory />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
