@@ -9,7 +9,9 @@ import './admin.css';
 
 const ServiceManagement = () => {
   const dispatch = useDispatch();
-  const services = useSelector((state) => state.admin.services);
+  const services = useSelector((state) => state.admin.services || []);
+
+  console.log(services);
 
   useEffect(() => {
     dispatch(fetchServices());
@@ -56,15 +58,19 @@ const ServiceManagement = () => {
       </Formik>
 
       <h3>Existing Services</h3>
-      {services.map((service) => (
-        <div key={service.id} className="service-item">
-          <h4>{service.name}</h4>
-          <p>{service.description}</p>
-          <p>Price: ${service.price}</p>
-          <button onClick={() => handleUpdateService(service)}>Update</button>
-          <button onClick={() => handleDeleteService(service.id)}>Delete</button>
-        </div>
-      ))}
+      {services.length > 0 ? (
+        services.map((service) => (
+          <div key={service.id} className="service-item">
+            <h4>{service.name}</h4>
+            <p>{service.description}</p>
+            <p>Price: ${service.price}</p>
+            <button onClick={() => handleUpdateService(service)}>Update</button>
+            <button onClick={() => handleDeleteService(service.id)}>Delete</button>
+          </div>
+        ))
+      ) : (
+        <p>No services available.</p>
+      )}
     </div>
   );
 }

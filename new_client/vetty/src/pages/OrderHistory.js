@@ -1,16 +1,24 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchOrderHistory } from '../redux/actions/adminActions';
-//import axios from 'axios';
+import { fetchOrderHistory, approveOrder, disapproveOrder } from '../redux/actions/adminActions';
 import './pages.css';
 
 function OrderHistory() {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.order.orders);
+  const userRole = useSelector((state) => state.auth.user?.role); // Assuming Redux stores user role
 
   useEffect(() => {
     dispatch(fetchOrderHistory());
   }, [dispatch]);
+
+  const handleApproveOrder = (orderId) => {
+    dispatch(approveOrder(orderId));
+  };
+
+  const handleDisapproveOrder = (orderId) => {
+    dispatch(disapproveOrder(orderId));
+  };
 
   return (
     <div className="order-history">
@@ -22,6 +30,13 @@ function OrderHistory() {
             <p className="order-date">Date: {order.date}</p>
             <p className="order-status">Status: {order.status}</p>
             <p className="order-total">Total Cost: ${order.totalCost}</p>
+            {/* Additional admin features */}
+            {userRole === 'admin' && (
+              <div className="admin-actions">
+                <button onClick={() => handleApproveOrder(order.id)}>Approve</button>
+                <button onClick={() => handleDisapproveOrder(order.id)}>Disapprove</button>
+              </div>
+            )}
           </div>
         ))
       ) : (
@@ -32,4 +47,3 @@ function OrderHistory() {
 }
 
 export default OrderHistory;
-

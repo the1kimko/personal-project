@@ -9,7 +9,11 @@ export const DELETE_SERVICE_SUCCESS = 'DELETE_SERVICE_SUCCESS';
 export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
 export const UPDATE_ORDER_STATUS_SUCCESS = 'UPDATE_ORDER_STATUS_SUCCESS';
 export const APPROVE_ORDER_SUCCESS = 'APPROVE_ORDER_SUCCESS';
+export const DISAPPROVE_ORDER_SUCCESS = 'DISAPPROVE_ORDER_SUCCESS';
 export const FETCH_ORDER_HISTORY_SUCCESS = 'FETCH_ORDER_HISTORY_SUCCESS';
+export const FETCH_SERVICE_REQUESTS_SUCCESS = 'FETCH_SERVICE_REQUESTS_SUCCESS';
+export const UPDATE_SERVICE_REQUEST_STATUS_SUCCESS = 'UPDATE_SERVICE_REQUEST_STATUS_SUCCESS';
+export const FETCH_SERVICE_REQUEST_HISTORY_SUCCESS = 'FETCH_SERVICE_REQUEST_HISTORY_SUCCESS';
 
 export const addProduct = (productData) => async (dispatch) => {
   try {
@@ -65,7 +69,7 @@ export const deleteProduct = (productId) => async (dispatch) => {
     }
 };
 
-// Fetch orders
+// Fetch orders (product orders)
   export const fetchOrders = () => async (dispatch) => {
     try {
       const response = await api.get('/orders');
@@ -85,6 +89,7 @@ export const deleteProduct = (productId) => async (dispatch) => {
     }
   };
   
+  // Approve order
   export const approveOrder = (orderId, status) => async (dispatch) => {
     try {
         const response = await api.put(`/orders/${orderId}`, { status });
@@ -94,11 +99,51 @@ export const deleteProduct = (productId) => async (dispatch) => {
     }
   };
 
+  // Disapprove order
+export const disapproveOrder = (orderId) => async (dispatch) => {
+  try {
+    const response = await api.put(`/orders/${orderId}`, { status: 'disapproved' });
+    dispatch({ type: DISAPPROVE_ORDER_SUCCESS, payload: response.data });
+  } catch (error) {
+    console.error('Error disapproving order:', error);
+  }
+};
+
   export const fetchOrderHistory = () => async (dispatch) => {
     try {
-      const response = await api.get('/orders');
+      const response = await api.get('/orderHistory');
       dispatch({ type: FETCH_ORDER_HISTORY_SUCCESS, payload: response.data });
     } catch (error) {
       console.error('Error fetching order history:', error);
     }
   };
+
+  // Fetch service requests
+export const fetchServiceRequests = () => async (dispatch) => {
+  try {
+    const response = await api.get('/serviceRequests');
+    dispatch({ type: FETCH_SERVICE_REQUESTS_SUCCESS, payload: response.data });
+  } catch (error) {
+    console.error('Error fetching service requests:', error);
+  }
+};
+
+// Update service request status
+export const updateServiceRequestStatus = (requestId, status) => async (dispatch) => {
+  try {
+    const response = await api.put(`/serviceRequests/${requestId}`, { status });
+    dispatch({ type: UPDATE_SERVICE_REQUEST_STATUS_SUCCESS, payload: response.data });
+  } catch (error) {
+    console.error('Error updating service request status:', error);
+  }
+};
+
+// Fetch service request history
+export const fetchServiceRequestHistory = () => async (dispatch) => {
+  try {
+    const response = await api.get('/serviceRequestHistory');
+    dispatch({ type: FETCH_SERVICE_REQUEST_HISTORY_SUCCESS, payload: response.data });
+  } catch (error) {
+    console.error('Error fetching service request history:', error);
+  }
+};
