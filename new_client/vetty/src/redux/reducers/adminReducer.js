@@ -9,6 +9,7 @@ import {
   DELETE_SERVICE_SUCCESS,
   FETCH_ORDERS_SUCCESS,
   UPDATE_ORDER_STATUS_SUCCESS,
+  SET_CURRENT_PAGE,
   APPROVE_ORDER_SUCCESS,
   DISAPPROVE_ORDER_SUCCESS,
   FETCH_ORDER_HISTORY_SUCCESS,
@@ -22,6 +23,8 @@ import {
     products: [], // initialize products here
     services: [],
     orders: [],
+    currentPage: 1,
+    itemsPerPage: 10,
     serviceRequests: [],
     orderHistory: [],
     serviceRequestHistory: []
@@ -69,7 +72,12 @@ import {
           ...state,
           orders: state.orders.map((order) =>
             order.id === action.payload.id ? action.payload : order
-          ),
+          ).filter(order => order.status !== 'completed'), // Filter out completed orders
+        };
+      case SET_CURRENT_PAGE:
+        return {
+          ...state,
+          currentPage: action.payload,
         };
       case APPROVE_ORDER_SUCCESS:
         return {
@@ -88,7 +96,7 @@ import {
       case FETCH_ORDER_HISTORY_SUCCESS:
         return {
           ...state,
-          orders: action.payload,
+          orderHistory: action.payload,
         };
       case FETCH_SERVICE_REQUESTS_SUCCESS:
         return { ...state, serviceRequests: action.payload };

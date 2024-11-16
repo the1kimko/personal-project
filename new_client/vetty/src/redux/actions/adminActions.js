@@ -8,6 +8,7 @@ export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
 export const DELETE_SERVICE_SUCCESS = 'DELETE_SERVICE_SUCCESS';
 export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
 export const UPDATE_ORDER_STATUS_SUCCESS = 'UPDATE_ORDER_STATUS_SUCCESS';
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const APPROVE_ORDER_SUCCESS = 'APPROVE_ORDER_SUCCESS';
 export const DISAPPROVE_ORDER_SUCCESS = 'DISAPPROVE_ORDER_SUCCESS';
 export const FETCH_ORDER_HISTORY_SUCCESS = 'FETCH_ORDER_HISTORY_SUCCESS';
@@ -84,10 +85,17 @@ export const deleteProduct = (productId) => async (dispatch) => {
     try {
       const response = await api.put(`/orders/${orderId}`, { status });
       dispatch({ type: UPDATE_ORDER_STATUS_SUCCESS, payload: response.data });
+      alert(`Order ${orderId} marked as ${status}.`);
     } catch (error) {
       console.error('Error updating order status:', error);
+      alert('Failed to update order status.');
     }
   };
+
+  export const setCurrentPage = (page) => ({
+    type: SET_CURRENT_PAGE,
+    payload: page,
+  });
   
   // Approve order
   export const approveOrder = (orderId, status) => async (dispatch) => {
