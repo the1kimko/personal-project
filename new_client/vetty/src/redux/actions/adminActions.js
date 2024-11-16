@@ -16,24 +16,31 @@ export const FETCH_SERVICE_REQUESTS_SUCCESS = 'FETCH_SERVICE_REQUESTS_SUCCESS';
 export const UPDATE_SERVICE_REQUEST_STATUS_SUCCESS = 'UPDATE_SERVICE_REQUEST_STATUS_SUCCESS';
 export const FETCH_SERVICE_REQUEST_HISTORY_SUCCESS = 'FETCH_SERVICE_REQUEST_HISTORY_SUCCESS';
 
+// Add product
 export const addProduct = (productData) => async (dispatch) => {
   try {
       const response = await api.post('/products', productData);
       dispatch({ type: ADD_PRODUCT_SUCCESS, payload: response.data });
+      alert('Product added successfully!');
   } catch (error) {
       console.error('Error adding product:', error);
+      alert('Failed to add product.');
   }
 };
 
+// Add service
 export const addService = (serviceData) => async (dispatch) => {
   try {
       const response = await api.post('/services', serviceData);
       dispatch({ type: ADD_SERVICE_SUCCESS, payload: response.data });
+      alert('Service added successfully!');
   } catch (error) {
       console.error('Error adding service:', error);
+      alert('Failed to add service.');
   }
 };
 
+// Update product
 export const updateProduct = (productId, updatedData) => async (dispatch) => {
   try {
       const response = await api.put(`/products/${productId}`, updatedData);
@@ -70,15 +77,15 @@ export const deleteProduct = (productId) => async (dispatch) => {
     }
 };
 
-// Fetch orders (product orders)
-  export const fetchOrders = () => async (dispatch) => {
-    try {
-      const response = await api.get('/orders');
-      dispatch({ type: FETCH_ORDERS_SUCCESS, payload: response.data });
-    } catch (error) {
-      console.error('Error fetching orders:', error);
-    }
-  };
+// Fetch orders with pagination
+export const fetchOrders = (page = 1, itemsPerPage = 10) => async (dispatch) => {
+  try {
+    const response = await api.get(`/orders?_page=${page}&_limit=${itemsPerPage}`);
+    dispatch({ type: FETCH_ORDERS_SUCCESS, payload: response.data });
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+  }
+};
 
   // Update order status
   export const updateOrderStatus = (orderId, status) => async (dispatch) => {

@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from 'react';
+// src/components/Product/ProductDetails.js
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-//import axios from 'axios';
-import api from '../../axiosConfig';
+import { fetchProductDetails } from '../../redux/actions/productActions';
+import { addToCart } from '../../redux/actions/cartActions';
 import './product.css';
 
 function ProductDetails() {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.product.currentProduct);
 
   useEffect(() => {
-    api.get(`/products/${id}`).then((response) => setProduct(response.data));
-  }, [id]);
+    dispatch(fetchProductDetails(id));
+  }, [dispatch, id]);
 
-  const handleAddToCart = async () => {
-    await api.post('/cart', { productId: id });
+  const handleAddToCart = () => {
+    dispatch(addToCart(id, 'product'));
     alert('Product added to cart');
   };
 

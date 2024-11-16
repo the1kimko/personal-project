@@ -23,24 +23,14 @@ export const fetchCartItems = () => async (dispatch) => {
 
     // Populate each cart item with full details
     const populatedCartItems = cartResponse.data.map((item) => {
-      let fullDetails = null;
-
-      if (item.productId) {
-        fullDetails = products.find((product) => product.id === item.productId);
-      } else if (item.serviceId) {
-        fullDetails = services.find((service) => service.id === item.serviceId);
-      }
+      let fullDetails = item.productId
+        ? products.find((product) => product.id === item.productId)
+        : services.find((service) => service.id === item.serviceId);
 
       // Combine cart item with full details
       return fullDetails
-        ? { 
-            ...item, 
-            name: fullDetails.name,
-            description: fullDetails.description,
-            price: fullDetails.price,
-            image: fullDetails.image
-          }
-        : { ...item, name: 'Item name unavailable', description: 'No description available', price: 'N/A' };
+        ? { ...item, ...fullDetails }
+        : { ...item, name: 'Item unavailable', description: '', price: 0 };
     });
 
     dispatch({ type: FETCH_CART_ITEMS_SUCCESS, payload: populatedCartItems });
@@ -101,10 +91,12 @@ export const removeCartItem = (itemId) => async (dispatch) => {
   }
 };
 
+// Clear cart
 export const clearCart = () => ({
   type: CLEAR_CART_SUCCESS,
 });
 
+// Checkout cart
 export const checkoutCart = () => async (dispatch) => {
   try {
     await api.post('/checkout'); // Mock checkout request to API

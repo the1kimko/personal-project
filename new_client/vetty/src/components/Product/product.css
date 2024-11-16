@@ -17,7 +17,9 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   background-image: linear-gradient(to right, #ff7e5f, #feb47b);
-  -webkit-background-clip: text;
+  -webkit-background-clip: text; /* Ensures compatibility with Webkit browsers */
+  -moz-background-clip: text; /* Optional for older Firefox compatibility */
+  background-clip: text; /* Standard property */
   padding: 20px 0;
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
