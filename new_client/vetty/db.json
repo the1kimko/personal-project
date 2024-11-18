@@ -162,38 +162,41 @@
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuNDk_kD-B6KW7hD19ptwlzHi2DtNErsrkog&s"
     }
   ],
-  "cart": [
-    {
-      "id": "0ff6",
-      "quantity": 1,
-      "productId": "2"
-    },
-    {
-      "id": "9f9d",
-      "quantity": 1,
-      "productId": "3"
-    },
-    {
-      "id": "049a",
-      "quantity": 1,
-      "productId": "4"
-    },
-    {
-      "id": "2d01",
-      "quantity": 1,
-      "serviceId": "1"
-    },
-    {
-      "id": "7681",
-      "quantity": 1,
-      "serviceId": "2"
-    },
+  "cart": [],
+  "orders": [
     {
       "id": "1dfa",
       "quantity": 1,
-      "serviceId": "3"
+      "serviceId": "3",
+      "name": "Bird Health Check",
+      "description": "Routine checkup for pet birds.",
+      "price": 30,
+      "image": "https://www.kaytee.com/-/media/Project/OneWeb/Kaytee/US/learn-care/pet-birds/bird-health/bird-health-png.jpg?h=314&w=500&hash=C42E577F1FE18F7E2BA9592FB964E830",
+      "date": "2024-11-18T15:12:06.761Z",
+      "status": "pending"
+    },
+    {
+      "id": "9da4",
+      "quantity": 1,
+      "serviceId": "1",
+      "name": "Dog Grooming",
+      "description": "Full grooming service for dogs.",
+      "price": 40,
+      "image": "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147569900/images/8a0f66d-c653-c22-a52b-fb3b3c3f4717_dog-groomer-pomeranian-GettyImages-1383177683.jpg",
+      "date": "2024-11-18T15:12:06.762Z",
+      "status": "pending"
+    },
+    {
+      "id": "3648",
+      "quantity": 1,
+      "productId": "1",
+      "name": "Premium Cat Food",
+      "description": "High-quality cat food with essential nutrients.",
+      "price": 12.99,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSAtAZWp_0yP8lxw134rYblTswukc0ek8V5Q&s",
+      "date": "2024-11-18T15:12:06.763Z",
+      "status": "pending"
     }
   ],
-  "orders": [],
   "checkout": []
 }

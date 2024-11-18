@@ -136,6 +136,7 @@ export const disapproveOrder = (orderId) => async (dispatch) => {
   };
 
   // Fetch service requests
+export const FETCH_SERVICES_SUCCESS = 'FETCH_SERVICES_SUCCESS';
 export const fetchServiceRequests = () => async (dispatch) => {
   try {
     const response = await api.get('/serviceRequests');

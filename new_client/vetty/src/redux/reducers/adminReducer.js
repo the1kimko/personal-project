@@ -13,6 +13,7 @@ import {
   APPROVE_ORDER_SUCCESS,
   DISAPPROVE_ORDER_SUCCESS,
   FETCH_ORDER_HISTORY_SUCCESS,
+  FETCH_SERVICES_SUCCESS,
   FETCH_SERVICE_REQUESTS_SUCCESS,
   UPDATE_SERVICE_REQUEST_STATUS_SUCCESS,
   FETCH_SERVICE_REQUEST_HISTORY_SUCCESS
@@ -97,6 +98,11 @@ import {
         return {
           ...state,
           orderHistory: action.payload,
+        };
+      case FETCH_SERVICES_SUCCESS:
+        return { 
+          ...state, 
+          services: action.payload 
         };
       case FETCH_SERVICE_REQUESTS_SUCCESS:
         return { ...state, serviceRequests: action.payload };
