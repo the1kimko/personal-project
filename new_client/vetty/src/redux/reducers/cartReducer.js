@@ -5,6 +5,7 @@ import {
   UPDATE_CART_ITEM_SUCCESS,
   REMOVE_CART_ITEM_SUCCESS,
   CLEAR_CART_SUCCESS,
+  CHECKOUT_CART_SUCCESS
 } from '../actions/cartActions';
 
 const initialState = {
@@ -47,6 +48,11 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         items: [],
+      };
+    case CHECKOUT_CART_SUCCESS: // Handle the checkout action
+      return {
+        ...state,
+        items: [] // Clear the cart or make any other state changes
       };
     default:
       return state;

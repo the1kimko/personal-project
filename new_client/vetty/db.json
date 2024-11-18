@@ -164,28 +164,18 @@
   ],
   "cart": [
     {
-      "quantity": 2,
-      "id": "ca4a"
-    },
-    {
-      "id": "da27",
+      "id": "820d",
       "quantity": 1,
-      "productId": "4"
+      "productId": "1"
     },
     {
-      "id": "f8ff",
-      "quantity": 1,
-      "productId": "3"
-    },
-    {
-      "id": "43b1",
+      "id": "961d",
       "quantity": 1,
       "productId": "2"
     },
     {
-      "id": "1799",
-      "quantity": 1,
-      "productId": "1"
+      "id": "52ab",
+      "quantity": 1
     }
   ],
   "orders": []

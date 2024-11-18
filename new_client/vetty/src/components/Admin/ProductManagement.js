@@ -30,8 +30,11 @@ const ProductManagement = () => {
     resetForm();
   };
 
-  const handleUpdateProduct = (product) => {
-    dispatch(updateProduct(product.id, product));
+  const handleUpdateProduct = (productId, updatedData) => {
+    console.log('Updating product:', productId, updatedData);
+    dispatch(updateProduct(productId, updatedData)).catch((error) => {
+      console.error('Error updating product:', error);
+    });
   };
 
   const handleDeleteProduct = (productId) => {

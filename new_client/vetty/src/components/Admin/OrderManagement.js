@@ -14,6 +14,8 @@ const OrderManagement = () => {
     dispatch(fetchOrders());
   }, [dispatch]);
 
+  console.log('Fetched orders:', orders);
+
   const handleStatusChange = (orderId, status) => {
     dispatch(updateOrderStatus(orderId, status));
     if (status === 'completed') {

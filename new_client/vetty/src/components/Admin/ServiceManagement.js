@@ -10,6 +10,7 @@ import './admin.css';
 const ServiceManagement = () => {
   const dispatch = useDispatch();
   const services = useSelector((state) => state.admin.services || []);
+  console.log('Fetched services:', services);
 
   console.log(services);
 

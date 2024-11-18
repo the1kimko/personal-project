@@ -6,6 +6,7 @@ export const FETCH_CART_ITEMS_SUCCESS = 'FETCH_CART_ITEMS_SUCCESS';
 export const ADD_TO_CART_SUCCESS = 'ADD_TO_CART_SUCCESS';
 export const UPDATE_CART_ITEM_SUCCESS = 'UPDATE_CART_ITEM_SUCCESS';
 export const REMOVE_CART_ITEM_SUCCESS = 'REMOVE_CART_ITEM_SUCCESS';
+export const CHECKOUT_CART_SUCCESS = 'CHECKOUT_CART_SUCCESS';
 export const CLEAR_CART_SUCCESS = 'CLEAR_CART_SUCCESS';
 
 // Fetch all items in the cart with product and service details
@@ -40,7 +41,7 @@ export const fetchCartItems = () => async (dispatch) => {
 };
 
 // Add to cart with quantity handling for both products and services
-export const addToCart = (itemId, type = 'product') => async (dispatch, getState) => {
+export const addToCart = (itemId, type) => async (dispatch, getState) => {
   try {
     const cartItems = getState().cart.items;
     
@@ -91,11 +92,6 @@ export const removeCartItem = (itemId) => async (dispatch) => {
   }
 };
 
-// Clear cart
-export const clearCart = () => ({
-  type: CLEAR_CART_SUCCESS,
-});
-
 // Checkout cart
 export const checkoutCart = () => async (dispatch) => {
   try {
@@ -106,3 +102,9 @@ export const checkoutCart = () => async (dispatch) => {
     console.error('Error during checkout:', error);
   }
 };
+
+// Clear cart
+export const clearCart = () => ({
+  type: CLEAR_CART_SUCCESS,
+});
+
