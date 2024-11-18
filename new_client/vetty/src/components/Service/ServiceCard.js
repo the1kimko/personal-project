@@ -7,7 +7,7 @@ function ServiceCard({ service }) {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    dispatch(addToCart(service.id)); // Dispatch with product ID only
+    dispatch(addToCart(service.id, 'service')); // Dispatch with product ID only
   };
   return (
     <div className="service-card">

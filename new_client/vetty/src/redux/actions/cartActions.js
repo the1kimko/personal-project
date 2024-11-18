@@ -12,26 +12,23 @@ export const CLEAR_CART_SUCCESS = 'CLEAR_CART_SUCCESS';
 // Fetch all items in the cart with product and service details
 export const fetchCartItems = () => async (dispatch) => {
   try {
-    // Fetch cart, products, and services
     const [cartResponse, productsResponse, servicesResponse] = await Promise.all([
       api.get('/cart'),
       api.get('/products'),
-      api.get('/services')
+      api.get('/services'),
     ]);
 
     const products = productsResponse.data;
     const services = servicesResponse.data;
 
-    // Populate each cart item with full details
     const populatedCartItems = cartResponse.data.map((item) => {
-      let fullDetails = item.productId
+      const fullDetails = item.productId
         ? products.find((product) => product.id === item.productId)
         : services.find((service) => service.id === item.serviceId);
 
-      // Combine cart item with full details
       return fullDetails
-        ? { ...item, ...fullDetails }
-        : { ...item, name: 'Item unavailable', description: '', price: 0 };
+        ? { ...item, name: fullDetails.name, description: fullDetails.description, price: fullDetails.price, image: fullDetails.image }
+        : { ...item, name: 'Item unavailable', description: 'No description available', price: 0 };
     });
 
     dispatch({ type: FETCH_CART_ITEMS_SUCCESS, payload: populatedCartItems });
@@ -40,36 +37,47 @@ export const fetchCartItems = () => async (dispatch) => {
   }
 };
 
+
 // Add to cart with quantity handling for both products and services
 export const addToCart = (itemId, type) => async (dispatch, getState) => {
   try {
+    // Validate type to ensure it's either 'product' or 'service'
+    if (!['product', 'service'].includes(type)) {
+      console.error(`Invalid type passed to addToCart: ${type}`);
+      alert('Invalid item type. Please try again.');
+      return;
+    }
+
+    console.log(`Adding item to cart: ${itemId}, type: ${type}`);
+
     const cartItems = getState().cart.items;
-    
+
     // Check if the item already exists in the cart
-    const existingItem = cartItems.find((item) => 
-      (type === 'product' && item.productId === itemId) || 
+    const existingItem = cartItems.find((item) =>
+      (type === 'product' && item.productId === itemId) ||
       (type === 'service' && item.serviceId === itemId)
     );
 
     if (existingItem) {
-      // Update the quantity of the existing item
       const updatedQuantity = existingItem.quantity + 1;
       dispatch(updateCartItem(existingItem.id, updatedQuantity));
       alert('Quantity updated in cart!');
     } else {
-      // Add a new item to the cart with productId or serviceId based on type
       const newItem = { quantity: 1 };
       if (type === 'product') newItem.productId = itemId;
       if (type === 'service') newItem.serviceId = itemId;
-      
+
+      console.log('New item to add:', newItem);
+
       const response = await api.post('/cart', newItem);
       dispatch({ type: ADD_TO_CART_SUCCESS, payload: response.data });
-      alert('Item added to cart!');
+      alert(`${type === 'product' ? 'Product' : 'Service'} added to cart!`);
     }
   } catch (error) {
     console.error('Error adding item to cart:', error);
   }
 };
+
 
 // Update the quantity of an item in the cart
 export const updateCartItem = (itemId, quantity) => async (dispatch) => {
@@ -93,18 +101,39 @@ export const removeCartItem = (itemId) => async (dispatch) => {
 };
 
 // Checkout cart
-export const checkoutCart = () => async (dispatch) => {
+export const checkoutCart = () => async (dispatch, getState) => {
   try {
-    await api.post('/checkout'); // Mock checkout request to API
-    dispatch(clearCart()); // Clear cart in the Redux store
+    const state = getState();
+    const cartItems = state.cart.items;
+
+    // Simulate adding to orders
+    const addToOrdersPromises = cartItems.map(async (item) => {
+      const order = {
+        ...item,
+        date: new Date().toISOString(),
+        status: 'pending',
+      };
+      return await api.post('/orders', order);
+    });
+
+    await Promise.all(addToOrdersPromises);
+
+    // Clear the cart
+    await Promise.all(
+      cartItems.map(async (item) => api.delete(`/cart/${item.id}`))
+    );
+
+    dispatch(clearCart());
     alert('Checkout successful! Your cart has been cleared.');
   } catch (error) {
     console.error('Error during checkout:', error);
+    alert('Checkout failed. Please try again.');
   }
 };
 
 // Clear cart
 export const clearCart = () => ({
-  type: CLEAR_CART_SUCCESS,
+  type: CLEAR_CART_SUCCESS, // Ensure this matches your reducer's type
 });
+
 

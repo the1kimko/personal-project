@@ -6,7 +6,7 @@ function ProductCard({ product }) {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product.id)); // Dispatch with product ID only
+    dispatch(addToCart(product.id, 'product')); // Dispatch with product ID only
   };
 
   return (

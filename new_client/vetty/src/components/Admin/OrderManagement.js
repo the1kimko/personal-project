@@ -36,6 +36,10 @@ const OrderManagement = () => {
 
   const totalPages = Math.ceil(orders.length / itemsPerPage);
 
+  if (totalPages < currentPage) {
+    dispatch(setCurrentPage(1)); // Reset to first page if the current page is invalid
+  }
+
   return (
     <div className="order-management">
       <h2>Order Management</h2>

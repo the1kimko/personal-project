@@ -43,10 +43,12 @@ export const addService = (serviceData) => async (dispatch) => {
 // Update product
 export const updateProduct = (productId, updatedData) => async (dispatch) => {
   try {
-      const response = await api.put(`/products/${productId}`, updatedData);
-      dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: response.data });
+    const response = await api.put(`/products/${productId}`, updatedData);
+    dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: response.data });
+    alert('Product updated successfully!');
   } catch (error) {
-      console.error('Error updating product:', error);
+    console.error('Error updating product:', error);
+    alert('Failed to update product.');
   }
 };
 

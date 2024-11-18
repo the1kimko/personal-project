@@ -164,19 +164,36 @@
   ],
   "cart": [
     {
-      "id": "820d",
-      "quantity": 1,
-      "productId": "1"
-    },
-    {
-      "id": "961d",
+      "id": "0ff6",
       "quantity": 1,
       "productId": "2"
     },
     {
-      "id": "52ab",
-      "quantity": 1
+      "id": "9f9d",
+      "quantity": 1,
+      "productId": "3"
+    },
+    {
+      "id": "049a",
+      "quantity": 1,
+      "productId": "4"
+    },
+    {
+      "id": "2d01",
+      "quantity": 1,
+      "serviceId": "1"
+    },
+    {
+      "id": "7681",
+      "quantity": 1,
+      "serviceId": "2"
+    },
+    {
+      "id": "1dfa",
+      "quantity": 1,
+      "serviceId": "3"
     }
   ],
-  "orders": []
+  "orders": [],
+  "checkout": []
 }
