@@ -44,6 +44,8 @@ export const addService = (serviceData) => async (dispatch) => {
 // Update product
 export const updateProduct = (productId, updatedData) => async (dispatch) => {
   try {
+    console.log('Product ID:', productId); // Debug log
+    console.log('Updated Data:', updatedData); // Debug log
     const response = await api.put(`/products/${productId}`, updatedData);
     dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: response.data });
     alert('Product updated successfully!');
@@ -57,8 +59,10 @@ export const updateService = (serviceId, updatedData) => async (dispatch) => {
   try {
       const response = await api.put(`/services/${serviceId}`, updatedData);
       dispatch({ type: UPDATE_SERVICE_SUCCESS, payload: response.data });
+      alert('Service updated successfully!');
   } catch (error) {
       console.error('Error updating service:', error);
+      alert('Failed to update service.');
   }
 };
 
