@@ -27,7 +27,7 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         items: [
           ...state.items, 
-          { ...action.payload, quantity: action.payload.quantity ?? 1}
+          { ...action.payload, quantity: action.payload.quantity ?? 1, userId: action.payload.userId }
         ],
       };
     case UPDATE_CART_ITEM_SUCCESS:

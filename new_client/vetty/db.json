@@ -58,6 +58,12 @@
       "username": "Infinite",
       "password": "1234567",
       "role": "user"
+    },
+    {
+      "id": "50dd",
+      "username": "Jabez",
+      "password": "jabez009",
+      "role": "user"
     }
   ],
   "products": [
@@ -102,14 +108,6 @@
       "image": "https://ishtarcompany.com/wp-content/uploads/2024/04/CAT-LITTER-product.jpg"
     },
     {
-      "id": "88d1",
-      "name": "milk",
-      "description": "for adiitional nutrients",
-      "price": 52,
-      "stock": 5,
-      "image": "data:image/jpeg;base64,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"
-    },
-    {
       "id": "c4c8",
       "name": "maize feed",
       "description": "for maximum cabohydrates",
@@ -134,13 +132,6 @@
       "image": "https://d2zp5xs5cp8zlg.cloudfront.net/image-52999-800.jpg"
     },
     {
-      "id": "3",
-      "name": "Bird Health Check",
-      "description": "Routine checkup for pet birds.",
-      "price": 30,
-      "image": "https://www.kaytee.com/-/media/Project/OneWeb/Kaytee/US/learn-care/pet-birds/bird-health/bird-health-png.jpg?h=314&w=500&hash=C42E577F1FE18F7E2BA9592FB964E830"
-    },
-    {
       "id": "4",
       "name": "Fish Tank Cleaning",
       "description": "Professional cleaning service for fish tanks.",
@@ -162,39 +153,75 @@
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuNDk_kD-B6KW7hD19ptwlzHi2DtNErsrkog&s"
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": "33f8",
+      "userId": "50dd",
+      "quantity": 1,
+      "productId": "3"
+    },
+    {
+      "id": "303b",
+      "userId": "50dd",
+      "quantity": 1,
+      "productId": "2"
+    }
+  ],
   "orders": [
     {
-      "id": "1dfa",
+      "status": "completed",
+      "id": "1dfa"
+    },
+    {
+      "status": "approved",
+      "id": "9da4"
+    },
+    {
+      "status": "completed",
+      "id": "3648"
+    },
+    {
+      "id": "9a5f",
       "quantity": 1,
-      "serviceId": "3",
-      "name": "Bird Health Check",
-      "description": "Routine checkup for pet birds.",
-      "price": 30,
-      "image": "https://www.kaytee.com/-/media/Project/OneWeb/Kaytee/US/learn-care/pet-birds/bird-health/bird-health-png.jpg?h=314&w=500&hash=C42E577F1FE18F7E2BA9592FB964E830",
-      "date": "2024-11-18T15:12:06.761Z",
+      "productId": "4",
+      "name": "Bird Seed Mix",
+      "description": "Nutritious seed mix for pet birds.",
+      "price": 7.99,
+      "image": "https://www.thompson-morgan.com/product_images/100/G2535-3.jpg",
+      "date": "2024-11-19T07:35:09.704Z",
       "status": "pending"
     },
     {
-      "id": "9da4",
+      "id": "4e56",
       "quantity": 1,
-      "serviceId": "1",
-      "name": "Dog Grooming",
-      "description": "Full grooming service for dogs.",
-      "price": 40,
-      "image": "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147569900/images/8a0f66d-c653-c22-a52b-fb3b3c3f4717_dog-groomer-pomeranian-GettyImages-1383177683.jpg",
-      "date": "2024-11-18T15:12:06.762Z",
+      "serviceId": "4",
+      "name": "Fish Tank Cleaning",
+      "description": "Professional cleaning service for fish tanks.",
+      "price": 20,
+      "image": "https://m.media-amazon.com/images/I/81TUiqEyO5L._AC_UF894,1000_QL80_.jpg",
+      "date": "2024-11-19T07:35:09.706Z",
       "status": "pending"
     },
     {
-      "id": "3648",
+      "id": "34cb",
       "quantity": 1,
-      "productId": "1",
-      "name": "Premium Cat Food",
-      "description": "High-quality cat food with essential nutrients.",
-      "price": 12.99,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSAtAZWp_0yP8lxw134rYblTswukc0ek8V5Q&s",
-      "date": "2024-11-18T15:12:06.763Z",
+      "productId": "3",
+      "name": "Fish Flakes",
+      "description": "Flake food for aquarium fish.",
+      "price": 5.49,
+      "image": "https://alzufeeds.co.za/wp-content/uploads/2021/10/MG_1604-A-min-1.jpg",
+      "date": "2024-11-19T08:08:43.582Z",
+      "status": "pending"
+    },
+    {
+      "id": "0eea",
+      "quantity": 1,
+      "serviceId": "bd4b",
+      "name": "injetion",
+      "description": "for protection",
+      "price": 34,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuNDk_kD-B6KW7hD19ptwlzHi2DtNErsrkog&s",
+      "date": "2024-11-19T08:08:43.584Z",
       "status": "pending"
     }
   ],

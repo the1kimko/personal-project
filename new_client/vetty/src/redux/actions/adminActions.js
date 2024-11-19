@@ -2,6 +2,7 @@ import api from '../../axiosConfig';
 
 export const ADD_PRODUCT_SUCCESS = 'ADD_PRODUCT_SUCCESS';
 export const ADD_SERVICE_SUCCESS = 'ADD_SERVICE_SUCCESS';
+export const FETCH_SERVICES_SUCCESS = 'FETCH_SERVICES_SUCCESS';
 export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
 export const UPDATE_SERVICE_SUCCESS = 'UPDATE_SERVICE_SUCCESS';
 export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
@@ -136,7 +137,6 @@ export const disapproveOrder = (orderId) => async (dispatch) => {
   };
 
   // Fetch service requests
-export const FETCH_SERVICES_SUCCESS = 'FETCH_SERVICES_SUCCESS';
 export const fetchServiceRequests = () => async (dispatch) => {
   try {
     const response = await api.get('/serviceRequests');

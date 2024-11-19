@@ -10,10 +10,17 @@ export const CHECKOUT_CART_SUCCESS = 'CHECKOUT_CART_SUCCESS';
 export const CLEAR_CART_SUCCESS = 'CLEAR_CART_SUCCESS';
 
 // Fetch all items in the cart with product and service details
-export const fetchCartItems = () => async (dispatch) => {
+export const fetchCartItems = () => async (dispatch, getState) => {
   try {
+    const state = getState();
+    const userId = state.auth.user?.id;
+
+    if (!userId) {
+      console.error('No userId found. Fetching cart items failed.');
+      return;
+    }
     const [cartResponse, productsResponse, servicesResponse] = await Promise.all([
-      api.get('/cart'),
+      api.get(`/cart?userId=${userId}`),
       api.get('/products'),
       api.get('/services'),
     ]);
@@ -41,6 +48,13 @@ export const fetchCartItems = () => async (dispatch) => {
 // Add to cart with quantity handling for both products and services
 export const addToCart = (itemId, type) => async (dispatch, getState) => {
   try {
+    const state = getState();
+    const userId = state.auth.user?.id; // Retrieve userId from auth state
+
+    if (!userId) {
+      alert('User not logged in. Please log in to add items to your cart.');
+      return;
+    }
     // Validate type to ensure it's either 'product' or 'service'
     if (!['product', 'service'].includes(type)) {
       console.error(`Invalid type passed to addToCart: ${type}`);
@@ -50,12 +64,12 @@ export const addToCart = (itemId, type) => async (dispatch, getState) => {
 
     console.log(`Adding item to cart: ${itemId}, type: ${type}`);
 
-    const cartItems = getState().cart.items;
+    const cartItems = state.cart.items;
 
     // Check if the item already exists in the cart
     const existingItem = cartItems.find((item) =>
-      (type === 'product' && item.productId === itemId) ||
-      (type === 'service' && item.serviceId === itemId)
+      (type === 'product' && item.productId === itemId && item.userId === userId) ||
+      (type === 'service' && item.serviceId === itemId && item.userId === userId)
     );
 
     if (existingItem) {
@@ -63,18 +77,19 @@ export const addToCart = (itemId, type) => async (dispatch, getState) => {
       dispatch(updateCartItem(existingItem.id, updatedQuantity));
       alert('Quantity updated in cart!');
     } else {
-      const newItem = { quantity: 1 };
+      const newItem = { userId, quantity: 1 };
       if (type === 'product') newItem.productId = itemId;
       if (type === 'service') newItem.serviceId = itemId;
 
       console.log('New item to add:', newItem);
 
       const response = await api.post('/cart', newItem);
-      dispatch({ type: ADD_TO_CART_SUCCESS, payload: response.data });
+      dispatch({ type: ADD_TO_CART_SUCCESS, payload: response.data, userId });
       alert(`${type === 'product' ? 'Product' : 'Service'} added to cart!`);
     }
   } catch (error) {
     console.error('Error adding item to cart:', error);
+    alert('Failed to add item to cart. Please try again.');
   }
 };
 
