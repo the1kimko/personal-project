@@ -62,7 +62,7 @@
   ],
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Premium Cat Food",
       "description": "High-quality cat food with essential nutrients.",
       "price": 12.99,
@@ -70,7 +70,7 @@
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSAtAZWp_0yP8lxw134rYblTswukc0ek8V5Q&s"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Dog Chew Toy",
       "description": "Durable chew toy for dogs of all sizes.",
       "price": 9.99,
@@ -78,7 +78,7 @@
       "image": "https://m.media-amazon.com/images/I/71YOifgQNML.jpg"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Fish Flakes",
       "description": "Flake food for aquarium fish.",
       "price": 5.49,
@@ -86,7 +86,7 @@
       "image": "https://alzufeeds.co.za/wp-content/uploads/2021/10/MG_1604-A-min-1.jpg"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Bird Seed Mix",
       "description": "Nutritious seed mix for pet birds.",
       "price": 7.99,
@@ -94,7 +94,7 @@
       "image": "https://www.thompson-morgan.com/product_images/100/G2535-3.jpg"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Cat Litter",
       "description": "Odor-absorbing cat litter for easy cleanup.",
       "price": 14.99,
@@ -120,46 +120,46 @@
   ],
   "services": [
     {
-      "id": 1,
       "name": "Dog Grooming",
       "description": "Full grooming service for dogs.",
       "price": 40,
-      "image": "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147569900/images/8a0f66d-c653-c22-a52b-fb3b3c3f4717_dog-groomer-pomeranian-GettyImages-1383177683.jpg"
+      "image": "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147569900/images/8a0f66d-c653-c22-a52b-fb3b3c3f4717_dog-groomer-pomeranian-GettyImages-1383177683.jpg",
+      "id": "1"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Cat Vaccination",
       "description": "Vaccination service for cats to prevent diseases.",
       "price": 25,
       "image": "https://d2zp5xs5cp8zlg.cloudfront.net/image-52999-800.jpg"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Bird Health Check",
       "description": "Routine checkup for pet birds.",
       "price": 30,
       "image": "https://www.kaytee.com/-/media/Project/OneWeb/Kaytee/US/learn-care/pet-birds/bird-health/bird-health-png.jpg?h=314&w=500&hash=C42E577F1FE18F7E2BA9592FB964E830"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Fish Tank Cleaning",
       "description": "Professional cleaning service for fish tanks.",
       "price": 20,
       "image": "https://m.media-amazon.com/images/I/81TUiqEyO5L._AC_UF894,1000_QL80_.jpg"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Puppy Training",
       "description": "Basic obedience training for puppies.",
       "price": 50,
       "image": "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/14154017/Australian-Shepherd-being-trained-by-a-dog-trainer-outdoors.jpg"
     },
     {
-      "id": "bd4b",
-      "name": "injetion",
-      "description": "for protection",
+      "name": "Injection",
+      "description": "For protection",
       "price": 34,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuNDk_kD-B6KW7hD19ptwlzHi2DtNErsrkog&s"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuNDk_kD-B6KW7hD19ptwlzHi2DtNErsrkog&s",
+      "id": "bd4b"
     }
   ],
   "cart": [

@@ -1,5 +1,5 @@
 // src/components/Admin/ServiceManagement.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchServices } from '../../redux/actions/productActions';
 import { addService, updateService, deleteService } from '../../redux/actions/adminActions';
@@ -10,9 +10,7 @@ import './admin.css';
 const ServiceManagement = () => {
   const dispatch = useDispatch();
   const services = useSelector((state) => state.admin.services || []);
-  console.log('Fetched services:', services);
-
-  console.log(services);
+  const [editingService, setEditingService] = useState(null); // State to track the service being edited
 
   useEffect(() => {
     dispatch(fetchServices());
@@ -32,8 +30,15 @@ const ServiceManagement = () => {
     resetForm();
   };
 
-  const handleUpdateService = (service) => {
-    dispatch(updateService(service.id, service));
+  const handleEditClick = (service) => {
+    setEditingService(service); // Set the service being edited
+  };
+
+  const handleUpdateService = (values, { resetForm }) => {
+    const { id, ...updatedData } = values; // Extract id and updated fields
+    dispatch(updateService(id, updatedData));
+    setEditingService(null); // Exit edit mode
+    resetForm();
   };
 
   const handleDeleteService = (serviceId) => {
@@ -62,11 +67,44 @@ const ServiceManagement = () => {
       {services.length > 0 ? (
         services.map((service) => (
           <div key={service.id} className="service-item">
-            <h4>{service.name}</h4>
-            <p>{service.description}</p>
-            <p>Price: ${service.price}</p>
-            <button onClick={() => handleUpdateService(service)}>Update</button>
-            <button onClick={() => handleDeleteService(service.id)}>Delete</button>
+            {editingService?.id === service.id ? (
+              // Edit Form
+              <Formik
+                initialValues={{
+                  id: service.id,
+                  name: service.name,
+                  description: service.description,
+                  price: service.price,
+                  image: service.image,
+                }}
+                validationSchema={validationSchema}
+                onSubmit={handleUpdateService}
+              >
+                <Form className="form">
+                  <Field name="name" placeholder="Service Name" />
+                  <ErrorMessage name="name" component="div" className="error" />
+                  <Field name="description" placeholder="Description" />
+                  <ErrorMessage name="description" component="div" className="error" />
+                  <Field name="price" placeholder="Price" type="number" />
+                  <ErrorMessage name="price" component="div" className="error" />
+                  <Field name="image" placeholder="Image URL" />
+                  <ErrorMessage name="image" component="div" className="error" />
+                  <button type="submit">Save</button>
+                  <button type="button" onClick={() => setEditingService(null)}>
+                    Cancel
+                  </button>
+                </Form>
+              </Formik>
+            ) : (
+              // Display Service Details
+              <>
+                <h4>{service.name}</h4>
+                <p>{service.description}</p>
+                <p>Price: ${service.price}</p>
+                <button onClick={() => handleEditClick(service)}>Edit</button>
+                <button onClick={() => handleDeleteService(service.id)}>Delete</button>
+              </>
+            )}
           </div>
         ))
       ) : (
@@ -74,6 +112,6 @@ const ServiceManagement = () => {
       )}
     </div>
   );
-}
+};
 
 export default ServiceManagement;
