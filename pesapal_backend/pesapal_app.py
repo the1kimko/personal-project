@@ -114,6 +114,26 @@ def submit_order():
         }), response.status_code
     except requests.exceptions.RequestException as e:
         return jsonify({"error": str(e)}), 500
+    
+@app.route('/get-payment-status', methods=['GET'])
+def get_payment_status():
+    order_tracking_id = request.args.get('orderTrackingId')
+    status_token = request.headers.get('Authorization')
+
+    status_url = f"{PESAPAL_BASE_URL}/api/Transactions/GetTransactionStatus?orderTrackingId={order_tracking_id}"
+
+    headers = {"Authorization": status_token}
+    try:
+        response = requests.get(status_url, headers=headers)
+        response.raise_for_status()
+        result = response.json()
+        print(result)
+
+        return jsonify(result), response.status_code
+    
+    except requests.exceptions.RequestException as e:
+        print("error: ", e)
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(port=5001, debug=True)
