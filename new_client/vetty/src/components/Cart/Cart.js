@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCartItems, checkoutCart, removeCartItem, clearCart } from '../../redux/actions/cartActions';
+import { fetchCartItems, removeCartItem, clearCart } from '../../redux/actions/cartActions';
 import './cart.css';
 
 function Cart() {
@@ -15,16 +15,37 @@ function Cart() {
     dispatch(fetchCartItems());
   }, [dispatch]);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (!user) {
       alert('You need to log in to proceed with checkout.');
       navigate('/login');
       return;
     }
-    dispatch(checkoutCart());
-    dispatch(clearCart());
-    navigate('/order-confirmation');
+  
+    try {
+      const token = localStorage.getItem("authToken"); // JWT token from login
+      const response = await fetch('/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // Pass JWT for auth
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        const redirectUrl = data.redirect_url;
+        window.location.href = redirectUrl; // Redirect to Pesapal payment page
+      } else {
+        const error = await response.json();
+        alert(error.error || "Checkout failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      alert("An error occurred during checkout. Please try again.");
+    }
   };
+  
 
   const handleRemoveItem = (itemId) => {
     dispatch(removeCartItem(itemId));

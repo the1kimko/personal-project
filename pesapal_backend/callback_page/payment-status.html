@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Status</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f9;
+    }
+    .status-container {
+      text-align: center;
+      padding: 20px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 500px;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #333;
+    }
+    p {
+      font-size: 1rem;
+      color: #555;
+    }
+    .success {
+      color: #28a745;
+    }
+    .failure {
+      color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <div class="status-container">
+    <h1 id="status-message">Payment Status</h1>
+    <p id="order-id"></p>
+  </div>
+
+  <script>
+    // Extract query parameters from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderTrackingId = urlParams.get('orderTrackingId');
+    const status = urlParams.get('status'); // Expected values: 'SUCCESS', 'FAILED'
+
+    // Update page content dynamically
+    const statusMessage = document.getElementById('status-message');
+    const orderId = document.getElementById('order-id');
+
+    if (status === 'SUCCESS') {
+      statusMessage.innerText = 'Transaction Successful!';
+      statusMessage.className = 'success';
+      orderId.innerText = `Order Tracking ID: ${orderTrackingId}`;
+    } else if (status === 'FAILED') {
+      statusMessage.innerText = 'Transaction Failed!';
+      statusMessage.className = 'failure';
+      orderId.innerText = `Order Tracking ID: ${orderTrackingId}`;
+    } else {
+      statusMessage.innerText = 'Transaction Status Unknown';
+      statusMessage.className = '';
+      orderId.innerText = 'No additional details available.';
+    }
+  </script>
+</body>
+</html>
