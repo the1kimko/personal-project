@@ -18,6 +18,7 @@ class Service(db.Model, SerializerMixin):
     order_services = db.relationship("OrderService", back_populates="service", cascade="all, delete-orphan")
     service_requests = db.relationship("ServiceRequest", back_populates="service", cascade="all, delete-orphan")
     cart_items = db.relationship("CartItem", back_populates="service", cascade="all, delete-orphan")
+    wishlist_items = db.relationship("WishlistItem", back_populates="service", cascade="all, delete-orphan")
 
 
     # Toggle availability

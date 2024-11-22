@@ -17,4 +17,12 @@ class Product(db.Model, SerializerMixin):
     cart_items = db.relationship("CartItem", back_populates="product", cascade="all, delete-orphan")
     order_products = db.relationship("OrderProduct", back_populates="product", cascade="all, delete-orphan")
     product_orders = db.relationship("ProductOrder", back_populates="product", cascade="all, delete-orphan")
+    wishlist_items = db.relationship("WishlistItem", back_populates="product", cascade="all, delete-orphan")
+
+    # Check stock availability
+    def check_stock(self, quantity):
+        if self.stock < quantity:
+            raise ValueError(f"Insufficient stock for {self.name}. Available: {self.stock}, Requested: {quantity}")
+
+
 
