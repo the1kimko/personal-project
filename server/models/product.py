@@ -12,6 +12,9 @@ class Product(db.Model, SerializerMixin):
     price = db.Column(db.Float, nullable=False)
     stock = db.Column(db.Integer, default=0)
     created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+    image_url = db.Column(db.String(255), nullable=True)
 
     cart_items = db.relationship("CartItem", back_populates="product", cascade="all, delete-orphan")
     order_products = db.relationship("OrderProduct", back_populates="product", cascade="all, delete-orphan")
+    product_orders = db.relationship("ProductOrder", back_populates="product", cascade="all, delete-orphan")
+
