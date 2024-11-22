@@ -136,8 +136,9 @@ def get_payment_status():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(port=5001, debug=True)
-    # import os
-    # # Use the PORT environment variable, with a fallback to 5000
-    # port = int(os.environ.get("PORT", 5000))  
-    # app.run(host="0.0.0.0", port=port, debug=True)
+    # app.run(port=5001, debug=True)
+    
+    # Use the PORT environment variable, with a fallback to 5000
+    port = int(os.environ.get("PORT", 5001))
+    print(f"Running on port: {port}")  
+    app.run(host="0.0.0.0", port=port)
