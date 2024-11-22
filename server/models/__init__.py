@@ -19,4 +19,6 @@ from models.order import Order
 from models.order_product import OrderProduct
 from models.order_service import OrderService
 from models.service_request import ServiceRequest
+from models.product_order import ProductOrder
+from models.wishlist_item import WishlistItem
 
