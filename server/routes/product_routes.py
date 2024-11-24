@@ -7,12 +7,32 @@ product_bp = Blueprint("product", __name__)
 @product_bp.route("/", methods=["GET"])
 def get_all_products():
     products = Product.query.all()
-    return jsonify([product.to_dict() for product in products])
+
+    # Debugging: Check what is being serialized
+    print("Fetched Products:", [p.id for p in products])
+
+    # Return manually serialized data to avoid recursion
+    serialized_products = []
+    for product in products:
+        try:
+            serialized_products.append(product.to_dict())
+        except Exception as e:
+            print(f"Error serializing product {product.id}: {e}")
+
+    return jsonify(serialized_products)
+
 
 @product_bp.route("/<int:id>", methods=["GET"])
 def get_product(id):
     product = Product.query.get_or_404(id)
-    return jsonify(product.to_dict())
+    # Debug product serialization
+    try:
+        serialized_product = product.to_dict()
+        print("Serialized Product:", serialized_product)
+        return jsonify(serialized_product)
+    except Exception as e:
+        print(f"Error serializing product {id}: {e}")
+        return jsonify({"error": "Unable to serialize product"}), 500
 
 @product_bp.route("/", methods=["POST"])
 @jwt_required()

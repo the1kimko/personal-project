@@ -43,8 +43,10 @@ const ProductManagement = () => {
     resetForm();
   };
 
-  const handleDeleteProduct = (productId) => {
-    dispatch(deleteProduct(productId));
+  const handleDeleteProduct = (id) => {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      dispatch(deleteProduct(id));
+    }
   };
 
   return (

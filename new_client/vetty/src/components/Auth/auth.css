@@ -66,6 +66,7 @@
   box-shadow: 0 0 8px rgba(26, 188, 156, 0.3); /* Subtle glow on focus */
 }
 
+
 /* Role Selection (Dropdown in Register Form) */
 .register-form select {
   appearance: none;
@@ -75,6 +76,24 @@
   border-radius: 8px;
   border: 1px solid #ddd;
   transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-form .error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+.register-form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.register-form button:hover {
+  background-color: #45a049;
 }
 
 /* Error Messages */

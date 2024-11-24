@@ -1,11 +1,9 @@
-// src/redux/reducers/cartReducer.js
 import {
   FETCH_CART_ITEMS_SUCCESS,
   ADD_TO_CART_SUCCESS,
   UPDATE_CART_ITEM_SUCCESS,
   REMOVE_CART_ITEM_SUCCESS,
   CLEAR_CART_SUCCESS,
-  CHECKOUT_CART_SUCCESS
 } from '../actions/cartActions';
 
 const initialState = {
@@ -17,26 +15,18 @@ const cartReducer = (state = initialState, action) => {
     case FETCH_CART_ITEMS_SUCCESS:
       return {
         ...state,
-        items: action.payload.map(item => ({
-          ...item,
-          quantity: item.quantity ?? 1 // Ensure quantity defaults to 1 if null
-        })),
+        items: action.payload,
       };
     case ADD_TO_CART_SUCCESS:
       return {
         ...state,
-        items: [
-          ...state.items, 
-          { ...action.payload, quantity: action.payload.quantity ?? 1, userId: action.payload.userId }
-        ],
+        items: [...state.items, action.payload],
       };
     case UPDATE_CART_ITEM_SUCCESS:
       return {
         ...state,
         items: state.items.map((item) =>
-          item.id === action.payload.id 
-            ? { ...action.payload, quantity: action.payload.quantity ?? 1 } 
-            : item
+          item.id === action.payload.id ? action.payload : item
         ),
       };
     case REMOVE_CART_ITEM_SUCCESS:
@@ -48,11 +38,6 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         items: [],
-      };
-    case CHECKOUT_CART_SUCCESS: // Handle the checkout action
-      return {
-        ...state,
-        items: [] // Clear the cart or make any other state changes
       };
     default:
       return state;

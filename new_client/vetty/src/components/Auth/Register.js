@@ -8,6 +8,7 @@ import './auth.css';
 const Register = () => {
   // Define validation schema with Yup
   const validationSchema = Yup.object({
+    email: Yup.string().email("Invalid email").required("Email is required"),
     username: Yup.string().required('Username is required'),
     password: Yup.string()
       .required('Password is required')
@@ -18,27 +19,38 @@ const Register = () => {
   // Define form submission handler
   const handleRegister = async (values, { setSubmitting, setErrors }) => {
     try {
-      await api.post('/users', values); // Send role with registration data
+      await api.post('/auth/register', values); // Send role with registration data
       alert('Registration successful! You can now log in.');
       window.location.href = '/login';
     } catch (error) {
       console.error('Registration failed:', error);
-      setErrors({ apiError: 'Registration failed, try a different username' });
+
+      // Extract backend error message
+      if (error.response && error.response.data.message) {
+        setErrors({ apiError: error.response.data.message });
+      } else {
+        setErrors({ apiError: 'An unexpected error occurred. Please try again.' });
+      }
     } finally {
       setSubmitting(false);
     }
   };
+  
 
   return (
     <div className="register">
       <h2>Register</h2>
       <Formik
-        initialValues={{ username: '', password: '', role: '' }}
+        initialValues={{ email: '', username: '', password: '', role: '' }}
         validationSchema={validationSchema}
         onSubmit={handleRegister}
       >
         {({ isSubmitting, errors }) => (
           <Form className="register-form">
+            <div className="form-group">
+              <Field type="email" name="email" placeholder="Email" />
+              <ErrorMessage name="email" component="div" className="error" />
+            </div>
             <div className="form-group">
               <Field type="text" name="username" placeholder="Username" />
               <ErrorMessage name="username" component="div" className="error" />

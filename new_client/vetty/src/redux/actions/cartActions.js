@@ -13,91 +13,91 @@ export const CLEAR_CART_SUCCESS = 'CLEAR_CART_SUCCESS';
 export const fetchCartItems = () => async (dispatch, getState) => {
   try {
     const state = getState();
-    const userId = state.auth.user?.id;
+    const user = state.auth.user;
 
-    if (!userId) {
-      console.error('No userId found. Fetching cart items failed.');
+    if (!user || !user.id) {
+      console.error('User not logged in or user ID not found. Fetching cart items failed.');
       return;
     }
-    const [cartResponse, productsResponse, servicesResponse] = await Promise.all([
-      api.get(`/cart?userId=${userId}`),
-      api.get('/products'),
-      api.get('/services'),
-    ]);
 
-    const products = productsResponse.data;
-    const services = servicesResponse.data;
+    const token = localStorage.getItem('authToken'); // Ensure the token is available
+    if (!token) {
+      console.error('No auth token found. Fetching cart items failed.');
+      return;
+    }
 
-    const populatedCartItems = cartResponse.data.map((item) => {
-      const fullDetails = item.productId
-        ? products.find((product) => product.id === item.productId)
-        : services.find((service) => service.id === item.serviceId);
-
-      return fullDetails
-        ? { ...item, name: fullDetails.name, description: fullDetails.description, price: fullDetails.price, image: fullDetails.image }
-        : { ...item, name: 'Item unavailable', description: 'No description available', price: 0 };
+    const response = await api.get(`/cart`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Include token in request headers
+      },
     });
+    console.log("Fetched Cart Items:", response.data);
 
-    dispatch({ type: FETCH_CART_ITEMS_SUCCESS, payload: populatedCartItems });
+    dispatch({ type: FETCH_CART_ITEMS_SUCCESS, payload: response.data });
   } catch (error) {
     console.error('Error fetching cart items:', error);
   }
 };
 
 
+
 // Add to cart with quantity handling for both products and services
 export const addToCart = (itemId, type) => async (dispatch, getState) => {
   try {
     const state = getState();
-    const userId = state.auth.user?.id; // Retrieve userId from auth state
+    console.log('Current State:', state);
+    console.log("Auth state:", getState().auth);
+    
+    const user = state.auth.user; // Ensure user is loaded from Redux
 
-    if (!userId) {
+    if (!user || !user.id) {
+      console.error("User is null or ID is missing:", user);
       alert('User not logged in. Please log in to add items to your cart.');
       return;
     }
-    // Validate type to ensure it's either 'product' or 'service'
-    if (!['product', 'service'].includes(type)) {
-      console.error(`Invalid type passed to addToCart: ${type}`);
-      alert('Invalid item type. Please try again.');
+
+    const token = localStorage.getItem('authToken'); // Get token from localStorage
+    console.log("Token:", localStorage.getItem("authToken"));
+    if (!token) {
+      console.error("No auth token found in localStorage.");
+      alert('You must be logged in to perform this action.');
       return;
     }
+    
+    const newItem = { quantity: 1 };
+    if (type === 'product') newItem.product_id = itemId;
+    if (type === 'service') newItem.service_id = itemId;
 
-    console.log(`Adding item to cart: ${itemId}, type: ${type}`);
+    console.log("Adding item to cart:", newItem);
 
-    const cartItems = state.cart.items;
+    const response = await api.post('/cart', newItem, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Include token in request headers
+      },
+    });
 
-    // Check if the item already exists in the cart
-    const existingItem = cartItems.find((item) =>
-      (type === 'product' && item.productId === itemId && item.userId === userId) ||
-      (type === 'service' && item.serviceId === itemId && item.userId === userId)
-    );
-
-    if (existingItem) {
-      const updatedQuantity = existingItem.quantity + 1;
-      dispatch(updateCartItem(existingItem.id, updatedQuantity));
-      alert('Quantity updated in cart!');
-    } else {
-      const newItem = { userId, quantity: 1 };
-      if (type === 'product') newItem.productId = itemId;
-      if (type === 'service') newItem.serviceId = itemId;
-
-      console.log('New item to add:', newItem);
-
-      const response = await api.post('/cart', newItem);
-      dispatch({ type: ADD_TO_CART_SUCCESS, payload: response.data, userId });
-      alert(`${type === 'product' ? 'Product' : 'Service'} added to cart!`);
-    }
+    console.log("Item added to cart successfully:", response.data);
+    dispatch({ type: ADD_TO_CART_SUCCESS, payload: response.data });
+    alert('Item added to cart!');
   } catch (error) {
     console.error('Error adding item to cart:', error);
-    alert('Failed to add item to cart. Please try again.');
+    alert('Failed to add item to cart.');
   }
 };
 
-
 // Update the quantity of an item in the cart
-export const updateCartItem = (itemId, quantity) => async (dispatch) => {
+export const updateCartItem = (itemId, quantity) => async (dispatch, getState) => {
   try {
-    const response = await api.put(`/cart/${itemId}`, { quantity });
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      console.error('No auth token found.');
+      return;
+    }
+    const response = await api.put(`/cart/item/${itemId}`, { quantity }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     dispatch({ type: UPDATE_CART_ITEM_SUCCESS, payload: response.data });
   } catch (error) {
     console.error('Error updating cart item:', error);
@@ -105,9 +105,18 @@ export const updateCartItem = (itemId, quantity) => async (dispatch) => {
 };
 
 // Remove an item from the cart
-export const removeCartItem = (itemId) => async (dispatch) => {
+export const removeCartItem = (itemId) => async (dispatch, getState) => {
   try {
-    await api.delete(`/cart/${itemId}`);
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      console.error('No auth token found.');
+      return;
+    }
+    await api.delete(`/cart/item/${itemId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     dispatch({ type: REMOVE_CART_ITEM_SUCCESS, payload: itemId });
     alert('Item removed from cart.');
   } catch (error) {

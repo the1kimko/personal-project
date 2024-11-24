@@ -33,7 +33,7 @@ const productReducer = (state = initialState, action) => {
     case FETCH_SERVICE_DETAILS_SUCCESS:
       return {
         ...state,
-        serviceDetails: action.payload // Set service details when fetched
+        currentService: action.payload // Set service details when fetched
       };
     default:
       return state;

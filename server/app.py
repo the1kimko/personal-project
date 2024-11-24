@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
@@ -9,6 +10,14 @@ import os
 
 # Initialize the Flask app
 app = Flask(__name__)
+
+# # Enable CORS for all routes and allow requests from the frontend's origin
+# CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+
+app.url_map.strict_slashes = False
+
 
 # Configure the app
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///vetty.db'

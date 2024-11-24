@@ -4,14 +4,34 @@ from models import db, WishlistItem, Product, Service, User
 
 wishlist_bp = Blueprint('wishlist', __name__)
 
-@wishlist_bp.route('/', methods=['GET'])
+@wishlist_bp.route("/", methods=["GET"])
 @jwt_required()
 def get_wishlist():
-    """Retrieve all wishlist items for the logged-in user."""
     current_user = get_jwt_identity()
-    user = User.query.get(current_user["id"])
-    wishlist = WishlistItem.query.filter_by(user_id=user.id).all()
-    return jsonify([item.to_dict() for item in wishlist]), 200
+    wishlist_items = WishlistItem.query.filter_by(user_id=current_user["id"]).all()
+    results = []
+    for item in wishlist_items:
+        if item.product_id:
+            product = Product.query.get(item.product_id)
+            results.append({
+                "id": item.id,
+                "type": "product",
+                "name": product.name,
+                "description": product.description,
+                "price": product.price,
+                "image": product.image_url
+            })
+        elif item.service_id:
+            service = Service.query.get(item.service_id)
+            results.append({
+                "id": item.id,
+                "type": "service",
+                "name": service.name,
+                "description": service.description,
+                "price": service.price,
+                "image": service.image_url
+            })
+    return jsonify(results), 200
 
 @wishlist_bp.route('/product/<int:product_id>', methods=['POST'])
 @jwt_required()

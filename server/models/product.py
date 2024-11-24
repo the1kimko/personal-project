@@ -4,7 +4,7 @@ from sqlalchemy_serializer import SerializerMixin
 
 class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'
-    serialize_rules = ('-order_products.product', '-cart_items.product')  # Avoid recursive fields
+    serialize_rules = ('-cart_items', '-order_products', '-wishlist_items')  # Avoid recursive fields
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False)
@@ -19,6 +19,14 @@ class Product(db.Model, SerializerMixin):
     product_orders = db.relationship("ProductOrder", back_populates="product", cascade="all, delete-orphan")
     wishlist_items = db.relationship("WishlistItem", back_populates="product", cascade="all, delete-orphan")
 
+    # Debug relationships to confirm problematic ones
+    def to_dict(self, *args, **kwargs):
+        print("Serializing Product:", self.id)
+        print("Related Cart Items:", self.cart_items)
+        print("Related Order Products:", self.order_products)
+        print("Related Wishlist Items:", self.wishlist_items)
+        return super().to_dict(*args, **kwargs)
+    
     # Check stock availability
     def check_stock(self, quantity):
         if self.stock < quantity:

@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCartItems, removeCartItem, clearCart } from '../../redux/actions/cartActions';
+import { fetchCartItems, removeCartItem } from '../../redux/actions/cartActions';
 import './cart.css';
 
 function Cart() {
@@ -55,28 +55,22 @@ function Cart() {
     <div className="cart">
       <h2>Your Cart</h2>
       {cartItems.length > 0 ? (
-        cartItems.map((item, index) => {
-          const isProduct = item.productId !== undefined;
-          const isService = item.serviceId !== undefined;
-          return (
-            <div key={`${item.id}-${index}`} className="cart-item">
-              <img 
-                src={item.image || 'https://via.placeholder.com/150'} 
-                alt={item.name || (isProduct ? 'Product Image' : 'Service Image')} 
-                className="cart-item-image"
-              />
-              <h3>
-                {item.name || (isProduct ? 'Product name unavailable' : isService ? 'Service name unavailable' : 'Item name unavailable')}
-              </h3>
-              <p>{item.description || 'No description available'}</p>
-              <p>Price: ${item.price !== 'N/A' ? item.price : 'N/A'}</p>
-              <p>Quantity: {item.quantity || 1}</p>
-              <button onClick={() => handleRemoveItem(item.id)} className="remove-button">
-                Remove
-              </button>
-            </div>
-          );
-        })
+        cartItems.map((item, index) => ( // Removed extra {}
+          <div key={item.id || `cart-item-${index}`} className="cart-item">
+            <img 
+              src={item.image || 'https://via.placeholder.com/150'} 
+              alt={item.name || 'Unnamed Item'} 
+              className="cart-item-image"
+            />
+            <h3>{item.name}</h3>
+            <p>{item.description}</p>
+            <p>Price: ${item.price}</p>
+            <p>Quantity: {item.quantity}</p>
+            <button onClick={() => handleRemoveItem(item.id)} className="remove-button">
+              Remove
+            </button>
+          </div>
+        ))
       ) : (
         <p>Your cart is empty.</p>
       )}
@@ -87,6 +81,7 @@ function Cart() {
       )}
     </div>
   );
+  
 }
 
 export default Cart;

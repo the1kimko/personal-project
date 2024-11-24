@@ -55,6 +55,7 @@ export const updateProduct = (productId, updatedData) => async (dispatch) => {
   }
 };
 
+// Update service
 export const updateService = (serviceId, updatedData) => async (dispatch) => {
   try {
       const response = await api.put(`/services/${serviceId}`, updatedData);
@@ -66,19 +67,23 @@ export const updateService = (serviceId, updatedData) => async (dispatch) => {
   }
 };
 
+// Delete product
 export const deleteProduct = (productId) => async (dispatch) => {
     try {
         await api.delete(`/products/${productId}`);
         dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: productId });
+        alert('Product deleted successfully!');
       } catch (error) {
         console.error('Error deleting products:', error);
+        alert('Failed to delete product.');
     }
 };
-  
+  // Delete service
   export const deleteService = (serviceId) => async (dispatch) => {
     try {
         await api.delete(`/services/${serviceId}`);
         dispatch({ type: DELETE_SERVICE_SUCCESS, payload: serviceId });
+        alert('Service deleted successfully!');
     } catch (error) {
         console.error('Error deleting services:', error);
     }
@@ -133,7 +138,7 @@ export const disapproveOrder = (orderId) => async (dispatch) => {
 
   export const fetchOrderHistory = () => async (dispatch) => {
     try {
-      const response = await api.get('/orderHistory');
+      const response = await api.get('/orders');
       dispatch({ type: FETCH_ORDER_HISTORY_SUCCESS, payload: response.data });
     } catch (error) {
       console.error('Error fetching order history:', error);

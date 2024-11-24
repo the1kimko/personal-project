@@ -1,5 +1,4 @@
 // src/redux/reducers/adminReducer.js
-import { FETCH_PRODUCTS_SUCCESS } from '../actions/productActions';
 import { 
   ADD_PRODUCT_SUCCESS,
   ADD_SERVICE_SUCCESS,
@@ -33,11 +32,6 @@ import {
   
   const adminReducer = (state = initialState, action) => {
     switch (action.type) {
-      case FETCH_PRODUCTS_SUCCESS:
-        return {
-          ...state,
-          products: action.payload,
-        };
       case ADD_PRODUCT_SUCCESS:
           return { ...state, products: [...state.products, action.payload] };
       case ADD_SERVICE_SUCCESS:

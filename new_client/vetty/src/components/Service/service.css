@@ -70,22 +70,40 @@
   margin-top: 10px;
 }
 
-.service-card button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
+/* Style for buttons in the service card */
+.service-card .button {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 5px;
   cursor: pointer;
-  font-size: 16px;
-  margin-top: 15px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.service-card button:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
+.service-card .button.add-to-cart {
+  background-color: #2196f3; /* Blue for Add to Cart */
+  color: white;
+  border: 1px solid #2196f3;
 }
+
+.service-card .button.add-to-cart:hover {
+  background-color: #1976d2;
+  color: white;
+}
+
+.service-card .button.add-to-wishlist {
+  background-color: #e91e63; /* Pink for Add to Wishlist */
+  color: white;
+  border: 1px solid #e91e63;
+}
+
+.service-card .button.add-to-wishlist:hover {
+  background-color: #c2185b;
+  color: white;
+}
+
 
 .service-details {
   padding: 40px 20px;

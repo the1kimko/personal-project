@@ -19,18 +19,25 @@ def checkout():
         return jsonify({"error": "Your cart is empty!"}), 400
 
     # Prepare payment data
-    product_items = []
+    order_items = []
     total_amount = 0
 
     for item in cart_items:
         if item.product_id:
             product = Product.query.get(item.product_id)
-            product_items.append({"name": product.name, "quantity": item.quantity, "price": product.price})
-            total_amount += product.price * item.quantity
+            if product and product.stock >= item.quantity:
+                order_items.append({"name": product.name, "quantity": item.quantity, "price": product.price})
+                total_amount += product.price * item.quantity
+                product.stock -= item.quantity  # Reduce stock
+            else:
+                return jsonify({"error": f"Product '{product.name}' out of stock or insufficient quantity."}), 400
         elif item.service_id:
             service = Service.query.get(item.service_id)
-            product_items.append({"name": service.name, "quantity": item.quantity, "price": service.price})
-            total_amount += service.price * item.quantity
+            if service and service.available:
+                order_items.append({"name": service.name, "quantity": item.quantity, "price": service.price})
+                total_amount += service.price * item.quantity
+            else:
+                return jsonify({"error": f"Service '{service.name}' is unavailable."}), 400
 
     # Call Pesapal backend to process payment
     pesapal_payload = {
